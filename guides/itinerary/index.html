@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vietnam Trip Itinerary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F1EA;--card:#FFFFFF;--ink:#16211C;--muted:#55605A;--line:#D8D5C8;
+  --shutter:#5A2E3A;--shutter-ink:#F7E9EC;--shutter-dim:rgba(247,233,236,.68);
+  --ochre:#E0A52C;--ochre-ink:#6E4A0C;--ochre-soft:#F7E6BE;--lotus:#B9415E;--lotus-soft:#F6DDE3;--veg:#2E6B3A;--veg-soft:#DDEFD9;
+  --sea:#13414F;--sea-soft:#DCEBEF;--forest:#1D4A3C;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#101613;--card:#18201C;--ink:#ECEDE5;--muted:#A2ACA5;--line:#2B3631;
+  --shutter:#3D1F28;--ochre:#E9B44A;--ochre-ink:#F3D58E;--ochre-soft:#3A2F17;--lotus:#E7849C;--lotus-soft:#3A1F27;--veg:#9AD3A3;--veg-soft:#1E3322;--sea:#7FC3D6;--sea-soft:#15303A;--forest:#9AD3A3;}}
+:root[data-theme="dark"]{--paper:#101613;--card:#18201C;--ink:#ECEDE5;--muted:#A2ACA5;--line:#2B3631;--shutter:#3D1F28;--ochre:#E9B44A;--ochre-ink:#F3D58E;--ochre-soft:#3A2F17;--lotus:#E7849C;--lotus-soft:#3A1F27;--veg:#9AD3A3;--veg-soft:#1E3322;--sea:#7FC3D6;--sea-soft:#15303A;--forest:#9AD3A3;}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:72px;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header.top{padding:36px 0 18px}
+h1{font-size:clamp(30px,6vw,52px);line-height:1.02;font-weight:800;letter-spacing:-.025em;margin:0 0 14px;max-width:16ch}
+.lede{color:var(--muted);max-width:62ch;margin:0}
+.route{display:flex;flex-wrap:wrap;gap:6px 4px;align-items:center;margin:16px 0 0;padding:0;list-style:none;font-size:14px;font-weight:600}
+.route li{display:flex;align-items:center;gap:4px}
+.route li+li::before{content:"→";color:var(--muted);font-weight:400;margin-right:2px}
+h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margin:0 0 6px;line-height:1.15}
+.sub{color:var(--muted);margin:0 0 16px;max-width:64ch;font-size:15px}
+
+/* now card */
+.now{background:var(--shutter);color:var(--shutter-ink);border-radius:22px;padding:18px 20px;margin:4px 0 0;display:grid;gap:12px}
+.now .lab{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--shutter-dim);margin:0 0 2px}
+.now .big{font-size:22px;font-weight:800;letter-spacing:-.015em;line-height:1.2;margin:0}
+.now .sm{font-size:14px;color:var(--shutter-dim);margin:2px 0 0}
+.now .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 22px}
+.now .who{display:inline-block;font-size:12px;font-weight:700;background:rgba(255,255,255,.14);border-radius:6px;padding:2px 8px;margin-bottom:6px}
+.now a.jump{justify-self:start;font-size:14px;font-weight:700;color:var(--shutter-ink);text-decoration:none;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:7px 14px}
+
+/* controls */
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:18px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button,.btn{font:inherit;font-size:14px;font-weight:500;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;min-height:36px}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);margin:12px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:50%;flex:none;background:var(--ink);border:2px solid var(--ink)}
+.dot.s{background:var(--paper);border-color:var(--ochre)}
+.dot.c{background:var(--sea);border-color:var(--sea)}
+
+/* day nav */
+nav.days{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line);margin-top:10px}
+nav.days .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+nav.days a{flex:none;text-decoration:none;font-size:13.5px;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid var(--line);line-height:1.25;text-align:center}
+nav.days a small{display:block;font-size:11px;font-weight:500;color:var(--muted)}
+nav.days a:hover{border-color:var(--ink)}
+nav.days a.today{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+nav.days a.today small{color:inherit;opacity:.75}
+nav.days a[hidden]{display:none}
+
+/* before you fly */
+.prep{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin:28px 0 0}
+.prep h2{font-size:22px}
+.prep ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.prep label{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start;padding:8px 0;border-top:1px solid var(--line);cursor:pointer;font-size:15px}
+.prep li:first-child label{border-top:0}
+.prep input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--forest)}
+.prep b{font-weight:700}
+.prep .who{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:6px;background:var(--lotus-soft);color:var(--lotus);margin-right:4px;vertical-align:1px}
+.prep .crit{background:var(--lotus);color:#fff}
+.prep input:checked + span{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+.prep .note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+
+/* days */
+section.day{padding:30px 0 6px}
+.dayhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin:0 0 4px}
+.dayhead h2{margin:0}
+.dayhead .where{font-size:15px;font-weight:600;color:var(--muted)}
+.daytags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 14px;padding:0;list-style:none}
+.daytags li{font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:8px;background:var(--ochre-soft);color:var(--ochre-ink)}
+.daytags li.g a{text-decoration:none}
+.daytags li.g{background:var(--sea-soft);color:var(--sea)}
+.list{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.it{display:grid;grid-template-columns:66px 18px minmax(0,1fr);gap:0 12px;padding:12px 18px;position:relative}
+.it+.it{border-top:1px solid var(--line)}
+.it .tm{font-weight:800;font-size:16px;letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1.35}
+.it .tm small{display:block;font-size:11.5px;font-weight:500;color:var(--muted);letter-spacing:0}
+.it .tz{display:inline-block;font-size:10.5px;font-weight:700;color:var(--lotus);background:var(--lotus-soft);border-radius:5px;padding:0 5px;margin-top:3px}
+.it .rail{position:relative;display:flex;justify-content:center;padding-top:5px}
+.it .rail .dot{position:relative;z-index:1}
+.it .what{font-weight:700;line-height:1.35}
+.it .kind{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.02em;padding:1px 7px;border-radius:5px;margin-left:6px;vertical-align:2px;background:var(--ochre-soft);color:var(--ochre-ink)}
+.it .kind.c{background:var(--sea-soft);color:var(--sea)}
+.it .note{color:var(--muted);font-size:14.5px;margin:2px 0 0}
+.it .meta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin:6px 0 0;font-size:13px}
+.it .cost{font-weight:700}
+.it .cost .inr{font-weight:500;color:var(--ochre-ink);margin-left:4px}
+.it .meta a{font-weight:600;text-decoration:none;border-bottom:2px solid var(--line)}
+.it .meta a:hover{border-color:currentColor}
+.it.past{opacity:.55}
+.it.is-now{background:var(--ochre-soft)}
+.it.is-now::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--ochre)}
+.flag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--lotus);border-radius:5px;padding:1px 7px;margin-right:6px;vertical-align:2px}
+.flag.next{background:var(--ink);color:var(--paper)}
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.split.one{grid-template-columns:minmax(0,1fr)}
+.track h3{font-size:15px;font-weight:800;margin:0 0 8px;display:flex;align-items:center;gap:8px}
+.track h3 .pill{font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--ink);color:var(--paper)}
+.splitnote{font-size:14px;color:var(--muted);margin:14px 0 0}
+@media (max-width:820px){.split{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.it{grid-template-columns:54px 14px minmax(0,1fr);gap:0 10px;padding:12px 14px}}
+.box{margin:12px 0 0;padding:12px 14px;border-left:4px solid var(--ochre);background:var(--card);border-radius:0 12px 12px 0;font-size:14.5px}
+.box.rain{border-left-color:var(--sea)}
+.box.skip{border-left-color:var(--muted)}
+.box.warn{border-left-color:var(--lotus)}
+.box b{font-weight:700}
+.box ul{margin:4px 0 0;padding-left:18px}
+footer{padding:34px 0 44px;color:var(--muted);font-size:13px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media print{nav.days,.controls,.now,.prep input{display:none}.it.past{opacity:1}body{background:#fff}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>The plan, hour by hour</h1>
+  <p class="lede">25 October to 2 November 2026 for Bala, Antony and Jones. Items marked <b>Booked</b> are your fixed plans and tickets. Everything marked <b>Suggested</b> fills the gaps around them and can be swapped. All times are local to wherever you are that day.</p>
+  <ul class="route" aria-label="Route">
+    <li>Chennai</li><li>Mumbai</li><li>Hanoi</li><li>Ha Long Bay</li><li>Ninh Binh</li><li>Hanoi</li><li>Da Nang</li><li>Singapore or Kuala Lumpur</li><li>Chennai</li>
+  </ul>
+
+  <div class="now" id="now" aria-live="polite"></div>
+
+  <div class="controls">
+    <div class="chips" role="group" aria-label="Whose plan to show">
+      <button type="button" data-p="all" aria-pressed="true">Everyone</button>
+      <button type="button" data-p="ba" aria-pressed="false">Bala &amp; Antony</button>
+      <button type="button" data-p="j" aria-pressed="false">Jones</button>
+    </div>
+    <button type="button" class="btn" id="ics"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span id="ics-l">Add to my calendar</span></button>
+  </div>
+  <div class="legend" aria-hidden="true">
+    <span><i class="dot"></i>Booked</span>
+    <span><i class="dot c"></i>From the cruise's schedule</span>
+    <span><i class="dot s"></i>Suggested</span>
+  </div>
+</div></header>
+
+<nav class="days" aria-label="Days"><div class="wrap" id="daynav"></div></nav>
+
+<main class="wrap">
+  <section class="prep" aria-labelledby="h-prep">
+    <h2 id="h-prep">Before you fly</h2>
+    <p class="sub">The first item could stop someone boarding, so do it today. Ticks are saved on this device only.</p>
+    <ul id="prep"></ul>
+  </section>
+  <div id="days"></div>
+</main>
+
+<footer><div class="wrap">Opening hours, train times and show times come from operators and recent traveller guides, checked in October 2026. Prices marked approximate are estimates. Rupee amounts use ₹1 = 270 ₫, the same rate as the city guides. Confirm anything time-critical on the day, and check fares in the Grab app.</div></footer>
+
+<script>
+var RATE=270;
+/* time zones: Vietnam, India, Singapore and Malaysia */
+var TZ={VN:"+07:00",IN:"+05:30",SG:"+08:00",MY:"+08:00"};
+var TZN={VN:"Vietnam",IN:"India",SG:"Singapore",MY:"Malaysia"};
+
+/* k: b = booked, c = from the cruise's schedule, s = suggested
+   p: price in dong [min,max?,note?]; m: Google Maps search; g: [guide,section]; z: time zone if not the day's; a: calendar alert */
+var DAYS=[
+{d:"2026-10-25",z:"IN",city:"Chennai to Mumbai",items:[
+ {t:"16:00",k:"b",w:"Chennai Airport",n:"Domestic check-in for the Mumbai flight.",a:1},
+ {t:"19:15",k:"b",w:"Flight to Mumbai",a:1},
+ {t:"21:35",k:"b",w:"Land in Mumbai",n:"Your Hanoi flight leaves at 04:10. Check whether your bags are checked through to Hanoi, then move to international departures. Counters usually open about 3 hours before an international flight."}
+]},
+{d:"2026-10-26",z:"VN",city:"Mumbai to Hanoi",guide:"hanoi",tags:["Monday","Sunset around 17:20"],items:[
+ {t:"04:10",z:"IN",k:"b",w:"Flight to Hanoi",a:1},
+ {t:"10:00",k:"b",w:"Land at Noi Bai Airport, Hanoi",n:"Immigration with your e-visa can take 30–60 min. Buy a local SIM or eSIM in arrivals and draw some dong from an ATM for street food."},
+ {t:"11:00",k:"b",w:"Grab to Bao Anh Hotel",n:"The hotel is at Cổ Linh in Long Biên, across the river from the Old Quarter, so every outing below starts with a short Grab ride.",p:[250000,350000,"per car; approximate"],m:"Bao Anh Hotel, Co Linh, Long Bien, Hanoi"},
+ {t:"11:45",k:"b",w:"Lunch, freshen up, check in",n:"Standard check-in is usually 14:00. If the room isn't ready, leave your bags at reception and freshen up there."},
+ {t:"14:30",k:"b",w:"Grab to Train Street",n:"About 20–25 min from Long Biên.",p:[60000,120000,"per car; approximate"],g:["hanoi","city"]},
+ {t:"14:55",k:"b",w:"Train Street",n:"Pick a café on the tracks and buy a drink: that's how you get a seat. The train is expected around 15:15, but weekday times shift, so ask the café staff when you sit down. Police sometimes close access; follow the staff's lead.",m:"Hanoi Train Street Phung Hung"},
+ {t:"15:35",k:"s",w:"Walk to Hoa Lo Prison, visit until 16:45",n:"A 10-minute walk. The colonial-era prison later nicknamed the Hanoi Hilton; allow about an hour. It closes at 17:00, so go straight here after the train.",p:[50000,0,"approximate"],m:"Hoa Lo Prison Relic, Hanoi",g:["hanoi","city"]},
+ {t:"16:50",k:"s",w:"Hoan Kiem Lake and Ngoc Son Temple",n:"A 5-minute Grab ride. Cross the red Thê Húc bridge to the temple and stay for sunset over the lake. The temple closes at around 18:00.",p:[50000,0,"approximate"],m:"Ngoc Son Temple, Hanoi",g:["hanoi","city"]},
+ {t:"17:45",k:"s",w:"Egg coffee at Café Đinh",n:"Upstairs at 13 Đinh Tiên Hoàng, with a view over the lake. Café Giảng, where egg coffee was invented, is a 10-minute walk away if Đinh is full.",p:[30000,45000],m:"Cafe Dinh, 13 Dinh Tien Hoang, Hanoi",g:["hanoi","food"]},
+ {t:"18:30",k:"s",w:"Dinner: chả cá at Chả Cá Thăng Long",n:"Hanoi's signature dish: turmeric fish fried with dill at your table. It's at 21 Đường Thành, a 15-minute walk through the Old Quarter.",p:[150000,200000,"per person"],m:"Cha Ca Thang Long, 21 Duong Thanh, Hanoi",g:["hanoi","food"]},
+ {t:"19:35",k:"s",w:"Grab to X Space Immersive",n:"About 20–25 min to Royal City mall. Eight rooms of digital art and light projections, about an hour inside, open until 22:00.",p:[250000,300000,"per adult"],m:"X Space Immersive, Royal City, Hanoi",g:["hanoi","city"]},
+ {t:"21:00",k:"s",w:"Grab back to Bao Anh Hotel",n:"About 30 min, so you're in by around 21:35. Set an alarm for 06:00.",p:[100000,180000,"per car; approximate"]}
+],boxes:[
+ {k:"skip",h:"Left out today, and why",l:["<b>Temple of Literature</b> closes at around 17:00. After a 15:15 train there's time for it or Hoa Lo Prison, not both. Swap them if you'd rather see quiet courtyards than the prison.","<b>Vietnam Museum of Ethnology</b> is closed on Mondays.","<b>Tran Quoc Pagoda</b> is 4 km west on West Lake and doesn't fit between the train and dinner.","<b>Hoa Lo Prison Relic</b> on your list is the same place as Hoa Lo Prison."]},
+ {k:"tip",h:"Rather stay in the Old Quarter after dinner?",l:["Swap X Space for the water puppet show at Thang Long theatre (100,000–200,000 ₫, book a day ahead), then bia hơi on Tạ Hiện until 21:30. Hoan Kiem's walking street and night market only run Friday to Sunday, so they won't be on tonight."]}
+]},
+{d:"2026-10-27",z:"VN",city:"Ha Long Bay cruise",guide:"hanoi",tags:["Alisa Premier Cruise","Sunset around 17:15"],items:[
+ {t:"06:00",k:"b",w:"Wake up, get ready, breakfast",n:"Pack a small bag for the night on board."},
+ {t:"07:30",k:"b",w:"Grab to the limousine pickup",n:"172 Trần Quang Khải. Morning traffic from Long Biên takes 15–20 min, so leave on time.",p:[60000,120000,"per car; approximate"],m:"172 Tran Quang Khai, Hanoi",a:1},
+ {t:"08:00",k:"b",w:"Limousine to Ha Long Bay",n:"Drop-off at Tuan Chau International Port, Quảng Ninh.",a:1},
+ {t:"11:00",k:"b",w:"Reach Ha Long"},
+ {t:"11:50",k:"b",w:"Board at 16B Tuan Chau Marina Island",n:"Alisa Premier Cruise.",m:"Tuan Chau Marina, Ha Long",a:1},
+ {t:"12:30",k:"c",w:"Welcome on board"},
+ {t:"13:00",k:"c",w:"Lunch",n:"The boat passes a small fishing village while you eat."},
+ {t:"14:30",e:"15:30",k:"c",w:"Sung Sot Cave",n:"Wear shoes with grip and bring your camera."},
+ {t:"15:30",e:"16:30",k:"c",w:"Kayak or bamboo boat to Luon Cave",n:"Keep phones and cameras in a dry bag or leave them on board."},
+ {t:"18:00",k:"c",w:"Cooking class, happy hour and sunset party",n:"On the 4th-floor sundeck."},
+ {t:"19:30",k:"c",w:"Dinner in the restaurant"},
+ {t:"20:30",k:"c",w:"Free time",n:"Squid fishing, karaoke, gym, pool, bar or spa. Ask the Cruise Manager what's on."}
+],boxes:[
+ {k:"tip",h:"Catch the actual sunset",l:["In late October the sun sets at around 17:15–17:30, before the 18:00 party. Head up to the sundeck by 17:00."]}
+]},
+{d:"2026-10-28",z:"VN",city:"Ha Long Bay to Ninh Binh",guide:"hanoi",tags:["Tam Cốc"],items:[
+ {t:"06:45",e:"07:30",k:"c",w:"Breakfast"},
+ {t:"07:30",e:"08:30",k:"c",w:"Titop Island",n:"Swim or climb to the viewpoint. Bring a swimsuit, shoes with grip, sun cream, sunglasses and some small cash."},
+ {t:"09:45",k:"c",w:"Check out",n:"Put your luggage outside the door and return the key at reception. The crew takes the bags to the jetty."},
+ {t:"09:45",e:"10:30",k:"c",w:"Brunch"},
+ {t:"10:30",k:"c",w:"Pay the bar bill",n:"At the 2nd-floor bar counter, for drinks and extras. Ask whether they take cards; carry dong just in case."},
+ {t:"11:00",k:"c",w:"Disembark at Alisa Harbor",n:"Ask the crew how to get to Ha Long Happy Travel, Tuan Chau, for the 12:30 pickup."},
+ {t:"12:30",k:"b",w:"Limousine to Ninh Binh",n:"Pickup at Ha Long Happy Travel, Tuan Chau.",a:1},
+ {t:"16:00",k:"b",w:"Reach Ninh Binh, check in at Tam Coc Catalina",n:"Drop-off at Bưu điện Bích Động (the Bich Dong post office). Freshen up.",m:"Tam Coc Catalina Hotel, Ninh Binh"},
+ {t:"17:00",k:"s",w:"Cycle the lanes around Tam Cốc at golden hour",n:"Most hotels here lend bicycles. It's too late for a boat (they stop in the late afternoon and you'd be on the river in the dark), but the light on the karst around sunset is the best of the day.",p:[0,50000,"bike hire, if not free; approximate"],g:["hanoi","map"]},
+ {t:"18:00",k:"s",w:"Dinner: mountain goat and crispy rice",n:"Ninh Binh's two specialities are dê núi (mountain goat, grilled or steamed with ginger) and cơm cháy (crispy rice cakes). Family Restaurant near the Tam Cốc boat pier is one long-running option. Otherwise search the map below and pick a well-rated place on the main street.",p:[150000,250000,"per person; approximate"],m:"de nui restaurant Tam Coc Ninh Binh"},
+ {t:"19:30",k:"s",w:"Stroll Tam Cốc's main street, then an early night",n:"Tomorrow's alarm is at 05:15 for the sunrise climb."}
+]},
+{d:"2026-10-29",z:"VN",city:"Ninh Binh to Hanoi to Da Nang",guide:"hanoi",tags:["Thursday","Long day: pack light"],items:[
+ {t:"05:30",k:"s",w:"Grab or taxi to Mua Cave (Hang Múa)",n:"About 10 min from Tam Cốc. Ask the hotel to book the car the night before.",p:[60000,100000,"approximate"],m:"Hang Mua, Ninh Binh"},
+ {t:"05:45",e:"07:15",k:"s",w:"Climb about 500 steps for sunrise",n:"The view straight down over the Tam Cốc river valley, with a dragon statue on the ridge. Gates open at around 06:00 and the sun rises just before. Cooler and emptier now than at any other time.",p:[100000],g:["hanoi","map"]},
+ {t:"07:30",k:"s",w:"Breakfast, check out, leave bags at reception"},
+ {t:"08:15",k:"s",w:"Grab to Tràng An boat pier",n:"About 15 min.",p:[80000,150000,"per car; approximate"],m:"Trang An boat wharf, Ninh Binh"},
+ {t:"08:30",e:"11:15",k:"s",w:"Tràng An boat ride",n:"A UNESCO site: a rower takes you along the river and through low caves to island temples, 2.5–3 hours. Arriving early on a weekday beats the queues. This is the boat ride to choose if you only do one.",p:[250000,0,"per person, boat included"],g:["hanoi","map"]},
+ {t:"11:30",k:"s",w:"Lunch: grilled goat at Đồng Quê",n:"Near the Tràng An ticket gate. Order goat with cơm cháy if you didn't have it last night.",p:[150000,250000,"per person; approximate"],m:"Dong Que restaurant Trang An Ninh Binh"},
+ {t:"12:30",k:"s",w:"Hoa Lư ancient capital",n:"About 5 km away. Vietnam's capital in the 10th century, now two quiet temples to the kings Đinh and Lê. 45 min is enough.",m:"Hoa Lu ancient capital, Ninh Binh"},
+ {t:"13:30",k:"s",w:"Back to Tam Cốc; Bích Động Pagoda if you have energy",n:"A pagoda built into a cliff on three levels, 2.5 km from Tam Cốc by bike. Or just get a coffee near the pickup point.",m:"Bich Dong Pagoda, Ninh Binh"},
+ {t:"14:45",k:"s",w:"Collect bags and walk to the pickup point"},
+ {t:"15:25",k:"b",w:"Limousine to Hanoi",n:"Pickup at Bưu điện Bích Động.",a:1},
+ {t:"17:25",k:"b",w:"Reach Hanoi",n:"Drop-off at 160 Trần Quang Khải."},
+ {t:"17:30",k:"b",w:"Old Quarter and dinner",n:"Suggested: a 5-minute Grab with your bags to <b>Bún Chả Đắc Kim</b>, 1 Hàng Mành, for Hanoi's other signature dish: grilled pork, noodles, herbs and dipping broth. If there's time, pick up a bánh mì at Bánh Mì 25 (25 Hàng Cá) for the flight.",p:[60000,90000,"per bowl"],m:"Bun Cha Dac Kim, 1 Hang Manh, Hanoi",g:["hanoi","food"]},
+ {t:"19:00",k:"b",w:"Grab to Noi Bai Airport",n:"Evening traffic can stretch the ride to an hour.",p:[250000,350000,"per car"],a:1},
+ {t:"20:00",k:"b",w:"At Noi Bai, domestic terminal"},
+ {t:"22:25",k:"b",w:"Flight to Da Nang",a:1},
+ {t:"23:45",k:"b",w:"Land in Da Nang, Grab to Sekong Hotel",n:"160 Võ Nguyên Giáp, on the beach road, about 15 min from the airport. Check in and sleep.",p:[80000,150000,"per car; approximate"],m:"Sekong Hotel, 160 Vo Nguyen Giap, Da Nang"}
+]},
+{d:"2026-10-30",z:"VN",city:"Ba Na Hills",guide:"danang",tags:["Friday","Dragon Bridge show tonight"],items:[
+ {t:"07:00",k:"b",w:"Wake up, breakfast at the hotel",n:"Breakfast is included. Check the Ba Na forecast before you go (see the rain plan below)."},
+ {t:"07:45",k:"b",w:"Grab to Ba Na Hills",n:"45–60 min to the cable car station.",p:[350000,500000,"per car, one way"],g:["danang","map"]},
+ {t:"08:40",k:"s",w:"Tickets and cable car up",n:"Entry with the cable car is 1,000,000 ₫; with the buffet lunch, 1,300,000 ₫. Buying online the night before is usually a little cheaper. The cable car runs from around 07:30 and climbs to 1,400 m in about 20 min.",p:[1000000,1300000,"per person"]},
+ {t:"09:15",e:"10:15",k:"s",w:"Golden Bridge first",n:"The bridge held up by giant stone hands. Go straight there before tour groups arrive at around 10:00, then walk Le Jardin d'Amour gardens and the old Debay wine cellar.",m:"Golden Bridge, Ba Na Hills"},
+ {t:"10:30",k:"s",w:"Up to the French Village and Linh Ung pagoda",n:"The summit: a mock French town, with a pagoda and a big seated Buddha looking over the hills."},
+ {t:"11:30",k:"s",w:"Alpine coaster",n:"Runs from 08:00 to 17:00; queues build after lunch."},
+ {t:"12:15",k:"s",w:"Lunch",n:"The buffet, if you bought the combo ticket. Otherwise food at the top is pricey."},
+ {t:"13:15",e:"15:00",k:"s",w:"Fantasy Park and the French Village",n:"A huge indoor games hall: the one part that works in rain."},
+ {t:"15:15",k:"s",w:"Cable car down, Grab back to Sekong",n:"Back at around 16:45. Rest before the evening.",p:[350000,500000,"per car, one way"]},
+ {t:"18:45",k:"s",w:"Grab to the east end of the Dragon Bridge",n:"About 10 min from Sekong.",p:[40000,100000,"per car"]},
+ {t:"19:00",k:"s",w:"Dinner at Son Tra night market",n:"Street-food stalls every evening, right by the bridge. Or eat bánh xèo at Bánh Xèo Bà Dưỡng across the river.",m:"Son Tra night market, Da Nang",g:["danang","food"]},
+ {t:"21:00",k:"s",w:"Dragon Bridge breathes fire and water",n:"Free, at 21:00 for about 15 min. The bridge operator says it now runs on Friday as well as Saturday and Sunday; some guides still list weekends only, so ask your hotel in the morning. Stand on the east bank near the dragon's head by 20:45. This is the only show Bala and Antony can catch, so it's worth all three of you seeing it together tonight.",g:["danang","city"]},
+ {t:"21:30",k:"s",w:"Grab back to Sekong",p:[40000,100000,"per car"]}
+],boxes:[
+ {k:"rain",h:"If it's pouring or the hills are in cloud",l:["Late October is the wettest time here, and Ba Na's summit is often inside cloud. If the forecast is bad, don't spend over ₹11,000 for three to look at fog. Instead: Museum of Cham Sculpture, Han Market and lunch at Con Market in the morning, then Hoi An together in the afternoon (it's lovely in light rain), then the Dragon Bridge show."]}
+]},
+{d:"2026-10-31",z:"VN",city:"Marble Mountains, then you split up",guide:"danang",tags:["Saturday"],items:[
+ {t:"07:00",k:"b",w:"Wake up, breakfast at the hotel"},
+ {t:"07:45",k:"s",w:"Check out of Sekong, leave bags at reception"},
+ {t:"07:50",k:"b",w:"Grab to Marble Mountains",n:"15–20 min.",p:[100000,150000,"per car"],g:["danang","map"]},
+ {t:"08:10",k:"s",w:"Thủy Sơn: take the lift up",n:"Thủy Sơn is the main hill. Entry and the lift are paid separately.",p:[55000,0,"entry 40,000 + lift 15,000"],m:"Marble Mountains, Da Nang"},
+ {t:"08:15",e:"10:30",k:"s",w:"Pagodas, viewpoints and caves",n:"Linh Ứng pagoda, the Vọng Giang Đài viewpoint, Tàng Chơn cave, then Huyền Không cave, where shafts of morning sunlight fall on the shrine. Walk down the steps; they're slippery when wet."},
+ {t:"10:40",k:"s",w:"Âm Phủ cave",n:"A walk-through depiction of the underworld at the foot of the hill, 30–40 min.",p:[20000]},
+ {t:"11:20",k:"s",w:"Non Nước stone-carving village",n:"Workshops at the foot of the hills. Browse only; heavy pieces need shipping."},
+ {t:"11:50",k:"s",w:"Grab back up the beach road",p:[80000,150000,"per car"]},
+ {t:"12:15",k:"b",w:"Lunch together: seafood at Bé Mặn",n:"A big beachfront seafood hall on Võ Nguyên Giáp, the same road as Sekong. Pick from the tanks and ask the price before they cook it.",p:[250000,500000,"per person"],m:"Be Man seafood, Vo Nguyen Giap, Da Nang",g:["danang","food"]},
+ {t:"13:15",k:"s",w:"Collect bags at Sekong"}
+],split:{
+ ba:[
+  {t:"13:30",k:"b",w:"Grab to Da Nang Airport",n:"About 15 min. International terminal.",p:[80000,150000,"per car"],a:1},
+  {t:"14:30",k:"b",w:"At the airport"},
+  {t:"17:55",k:"b",w:"Flight to Singapore",a:1},
+  {t:"21:50",z:"SG",k:"b",w:"Land at Changi",n:"Dinner and sleep airside. The free snooze lounges in the transit areas are first come, first served. A transit hotel room is the comfortable option if you want a bed and shower.",g:null}
+ ],
+ j:[
+  {t:"13:30",k:"s",w:"Grab to Delicate Hotel to drop your bag",n:"23–25 Võ Văn Kiệt, about 10 min. Message them in advance to confirm an early bag drop.",p:[40000,100000,"per car"],m:"Delicate Hotel, 23 Vo Van Kiet, Da Nang"},
+  {t:"13:45",k:"b",w:"Grab to Hoi An",n:"About 45 min.",p:[300000,400000,"per car"],g:["danang","map"]},
+  {t:"14:35",k:"s",w:"Old town ticket and a bánh mì",n:"Buy the old town ticket at any booth. Then a bánh mì at Bánh Mì Phượng, 2B Phan Châu Trinh.",p:[120000,0,"ticket; bánh mì 30,000–45,000 extra"],m:"Banh Mi Phuong, Hoi An",g:["danang","food"]},
+  {t:"15:00",k:"s",w:"Japanese Covered Bridge, old houses and the Fujian hall",n:"The bridge, Tân Kỳ old house and the Fujian Assembly Hall. Your ticket covers entry to several of these.",m:"Japanese Covered Bridge, Hoi An"},
+  {t:"16:15",k:"s",w:"Mót herbal tea",n:"Lemongrass, lotus and lime, at 150 Trần Phú. Expect a short line.",p:[20000,30000],m:"Mot Hoi An, 150 Tran Phu"},
+  {t:"16:30",k:"s",w:"Cao lầu and chè bắp",n:"Cao lầu, chewy noodles only made properly here, at Cao Lầu Thanh, 26 Thái Phiên. Then sweet-corn pudding from the stalls around the market.",p:[30000,50000],m:"Cao Lau Thanh, 26 Thai Phien, Hoi An",g:["danang","food"]},
+  {t:"17:15",k:"s",w:"Cross to An Hội as the lanterns come on",n:"The riverside and the island light up around sunset."},
+  {t:"17:45",k:"s",w:"Lantern boat on the Thu Bồn",n:"About 20 min at dusk. Agree the price before you get in, and float a paper lantern.",p:[150000,200000,"per boat"]},
+  {t:"18:30",k:"b",w:"Dinner: cơm gà at Cơm Gà Bà Buội",n:"Hoi An's turmeric chicken rice, at 22 Phan Châu Trinh. White rose dumplings are on most old-town menus too.",p:[40000,70000],m:"Com Ga Ba Buoi, Hoi An",g:["danang","food"]},
+  {t:"19:45",k:"b",w:"Grab back to Delicate Hotel",n:"Leave by 19:45, not 20:00. The show starts at 21:00, not 21:30, and Saturday-night traffic is slow.",p:[300000,400000,"per car"],a:1},
+  {t:"20:35",k:"b",w:"Check in at Delicate Hotel"},
+  {t:"21:00",k:"b",w:"Dragon Bridge fire and water show",n:"From the east bank, a 5–10 min walk from the hotel. It's on again on Saturday nights, so you can see it a second time if you went on Friday, or stay longer in Hoi An instead.",g:["danang","city"]}
+ ]},
+boxes:[
+ {k:"warn",h:"Jones: the show starts at 21:00",l:["Your plan had it at 21:30. The bridge operator runs it at 21:00 on Friday, Saturday and Sunday, so leaving Hoi An at 20:00 means arriving as it starts. Leave by 19:45."]},
+ {k:"rain",h:"If Hoi An floods",l:["From late October the river can flood the old town. If streets are under water, stay in Da Nang: Museum of Cham Sculpture, Han Market, then the riverfront."]}
+]},
+{d:"2026-11-01",z:"VN",city:"Changi, and Jones's last morning in Da Nang",tags:["Sunday"],items:[],split:{
+ ba:[
+  {t:"07:00",z:"SG",k:"b",w:"Wake up and freshen up",n:"Paid showers are available at the transit hotels and some lounges."},
+  {t:"07:45",z:"SG",k:"s",w:"Breakfast: kaya toast, soft-boiled eggs and kopi",n:"Singapore's classic breakfast, sold at food courts in the transit area."},
+  {t:"08:30",z:"SG",k:"s",w:"Butterfly Garden, Terminal 3",n:"About 1,000 butterflies and a 6 m waterfall, on Level 2 of the T3 transit area. Free."},
+  {t:"09:30",z:"SG",k:"s",w:"The Slide@T3",n:"Singapore's tallest slide. You get a ride for spending S$10 at airport shops; riders must be 1.3–2 m tall."},
+  {t:"10:30",z:"SG",k:"s",w:"Skytrain to Terminal 2 gardens",n:"The Enchanted Garden, and the rooftop Sunflower Garden if it's open (check the airport app)."},
+  {t:"12:00",z:"SG",k:"s",w:"Lunch: chicken rice or laksa",n:"At a transit-area food court."},
+  {t:"13:00",z:"SG",k:"s",w:"Free movie theatre",n:"In the T2 and T3 transit areas, with recent films. A good place for a nap."},
+  {t:"15:30",z:"SG",k:"s",w:"Cactus Garden, Terminal 1",n:"An open-air garden on Level 3 of the T1 transit area."},
+  {t:"16:30",z:"SG",k:"s",w:"Shop, rest, charge phones",n:"Spend leftover Singapore dollars; dong can't be changed here easily."},
+  {t:"18:30",z:"SG",k:"s",w:"Dinner"},
+  {t:"19:30",z:"SG",k:"s",w:"Go to your departure gate",n:"Check the terminal on your boarding pass. Skytrain rides between T1, T2 and T3 take a few minutes; Terminal 4 is a bus ride away."},
+  {t:"21:15",z:"SG",k:"b",w:"Flight to Chennai",a:1},
+  {t:"22:50",z:"IN",k:"b",w:"Land in Chennai",n:"Home."}
+ ],
+ j:[
+  {t:"07:00",k:"b",w:"Wake up, get ready"},
+  {t:"07:15",k:"s",w:"Grab to the Lady Buddha at Son Tra",n:"About 20 min up to Linh Ứng Pagoda, with the 67 m white statue facing the sea. Drivers rarely wait at the top, so agree a waiting price before you get out.",p:[100000,150000,"per car, one way"],m:"Linh Ung Pagoda Son Tra, Da Nang",g:["danang","map"]},
+  {t:"08:45",k:"s",w:"Breakfast: bún chả cá",n:"Da Nang's breakfast fish-cake noodle soup, at Bún Chả Cá 109, 109 Nguyễn Chí Thanh.",p:[30000,50000],m:"Bun Cha Ca 109, Nguyen Chi Thanh, Da Nang",g:["danang","food"]},
+  {t:"09:30",k:"s",w:"Museum of Cham Sculpture",n:"The world's largest collection of Cham art, with Shiva, Vishnu and Ganesha carvings that will feel familiar. About an hour.",p:[60000],m:"Museum of Cham Sculpture, Da Nang",g:["danang","city"]},
+  {t:"10:40",k:"s",w:"Pink cathedral and Han Market",n:"A 10-minute walk to Da Nang Cathedral, then Han Market for coffee beans and snacks to take home.",m:"Han Market, Da Nang"},
+  {t:"11:30",k:"s",w:"Grab to Delicate Hotel, check out, leave your bag",n:"Confirm the checkout time when you arrive the night before; it's usually 12:00.",p:[40000,100000,"per car"]},
+  {t:"12:15",k:"s",w:"Lunch: Mì Quảng",n:"Da Nang's signature noodles, at Mì Quảng 1A, 1 Hải Phòng.",p:[30000,60000],m:"Mi Quang 1A, 1 Hai Phong, Da Nang",g:["danang","food"]},
+  {t:"13:15",k:"s",w:"Coconut coffee on the riverfront",n:"Cộng Cà Phê on Bạch Đằng, looking at the bridges. Then collect your bag.",p:[45000,65000],m:"Cong Caphe Bach Dang, Da Nang"},
+  {t:"14:00",k:"b",w:"Grab to Da Nang Airport",n:"10–15 min.",p:[60000,100000,"per car"],a:1},
+  {t:"14:30",k:"b",w:"At the airport"},
+  {t:"17:40",k:"b",w:"Flight to Malaysia",a:1},
+  {t:"21:40",z:"MY",k:"b",w:"Land in Malaysia, sleep",n:"If you leave the airport, Indians are visa-free in Malaysia until 31 December 2026, but you must submit the Malaysia Digital Arrival Card (MDAC) before landing."}
+ ]}},
+{d:"2026-11-02",z:"MY",city:"Kuala Lumpur to Chennai",only:"j",items:[
+ {t:"06:10",k:"b",w:"Flight to Chennai",a:1},
+ {t:"07:25",z:"IN",k:"b",w:"Land in Chennai",n:"Home."}
+]}
+];
+
+var PREP=[
+ {who:"Bala & Antony",crit:1,t:"<b>Check that your Singapore connection is on one ticket, with bags checked through to Chennai.</b> If the Da Nang–Singapore and Singapore–Chennai flights are separate bookings, you'll have to collect your bags and check in again, which means passing Singapore immigration. That needs a Singapore visa, which takes 3–5 working days. Call the airline today."},
+ {who:"Bala & Antony",t:"Jewel and the Rain Vortex are outside immigration, so without a Singapore visa you can't go there. The plan below keeps you airside the whole time."},
+ {who:"Jones",t:"Submit the <b>Malaysia Digital Arrival Card (MDAC)</b> online before 1 Nov. Indians are visa-free in Malaysia until 31 Dec 2026, but only with the MDAC done."},
+ {who:"All",t:"Carry your <b>Vietnam e-visa</b> printed and saved on your phone, and check that its dates cover your whole stay."},
+ {who:"All",t:"Ask <b>Bao Anh Hotel</b> for early check-in on 26 Oct. You'll arrive at around 11:00 and check-in is usually 14:00."},
+ {who:"All",t:"Install <b>Grab</b> and add a payment card; download offline Google Maps for Hanoi, Ninh Binh, Da Nang and Hoi An."},
+ {who:"All",t:"Tap <b>Save for offline</b> in the sidebar so these guides work without signal, and add the site to your home screen."},
+ {who:"Jones",t:"Message <b>Delicate Hotel</b> to confirm an early bag drop on 31 Oct at around 13:40."}
+];
+
+/* ---------- helpers ---------- */
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function fmtV(n){return n.toLocaleString("en-US");}
+function fmtI(n){var r=n/RATE;return "₹"+(r<100?Math.round(r):Math.round(r/10)*10).toLocaleString("en-IN");}
+function price(p){if(!p)return "";var a=p[0],b=p[1],note=p[2];
+  var v=a===0&&!b?"Free":(b?fmtV(a)+"–"+fmtV(b):fmtV(a))+" ₫";
+  var i=a===0&&!b?"":(b?fmtI(a)+"–"+fmtI(b).slice(1):fmtI(a));
+  return '<span class="cost">'+v+(i?'<span class="inr">≈ '+i+'</span>':'')+'</span>'+(note?' <span>'+esc(note)+'</span>':'');}
+function gmaps(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);}
+var GNAME={hanoi:"Hanoi guide",danang:"Da Nang guide"},SNAME={map:"day trips",city:"in the city",food:"food",move:"getting around"};
+function glink(g){return g?'<a href="../../#'+g[0]+'/'+g[1]+'" target="_top">'+GNAME[g[0]]+': '+SNAME[g[1]]+' →</a>':"";}
+function ts(day,it){return Date.parse(day.d+"T"+it.t+":00"+TZ[it.z||day.z]);}
+function dayLabel(d,opt){return new Date(d+"T12:00:00Z").toLocaleDateString("en-GB",Object.assign({timeZone:"UTC"},opt));}
+
+/* every item gets an absolute time, so "now" works across time zones */
+DAYS.forEach(function(day){
+  function prep(list,track){list.forEach(function(it,i){it.ts=ts(day,it);it.day=day;it.track=track;it.id=day.d+"-"+(track||"a")+"-"+i;});}
+  prep(day.items,"");
+  if(day.split){prep(day.split.ba,"ba");prep(day.split.j,"j");}
+});
+function timeline(p){var out=[];DAYS.forEach(function(day){if(day.only&&day.only!==p)return;out=out.concat(day.items);if(day.split)out=out.concat(day.split[p]);});return out;}
+
+/* ---------- state ---------- */
+var who="all";
+try{var s=localStorage.getItem("itin-who");if(s==="ba"||s==="j"||s==="all")who=s;}catch(e){}
+var NOW=(function(){var m=/[?&]now=([^&]+)/.exec(location.search);var t=m?Date.parse(decodeURIComponent(m[1])):NaN;return isNaN(t)?null:t;})();
+function now(){return NOW||Date.now();}
+
+/* ---------- render ---------- */
+function itemHTML(it){
+  var z=it.z||it.day.z,showZ=it.z&&it.z!==it.day.z;
+  var kind=it.k==="s"?'<span class="kind">Suggested</span>':it.k==="c"?'<span class="kind c">Cruise</span>':"";
+  var meta=[];
+  if(it.p)meta.push(price(it.p));
+  if(it.m)meta.push('<a href="'+gmaps(it.m)+'" target="_blank" rel="noopener">Map<span class="sr"> (opens in a new tab)</span> ↗</a>');
+  if(it.g)meta.push(glink(it.g));
+  return '<div class="it" id="i-'+it.id+'" data-ts="'+it.ts+'"><div class="tm">'+it.t+(it.e?'<small>to '+it.e+'</small>':'')+(showZ?'<span class="tz" title="'+TZN[z]+' time">'+TZN[z]+'</span>':'')+'</div>'
+    +'<div class="rail"><i class="dot'+(it.k==="s"?" s":it.k==="c"?" c":"")+'"></i></div>'
+    +'<div><div class="what"><span class="flagslot"></span>'+it.w+kind+'</div>'+(it.n?'<p class="note">'+it.n+'</p>':'')+(meta.length?'<div class="meta">'+meta.join("")+'</div>':'')+'</div></div>';
+}
+function listHTML(list){return list.length?'<div class="list">'+list.map(itemHTML).join("")+'</div>':"";}
+function render(){
+  var html="",nav="";
+  DAYS.forEach(function(day){
+    var hide=day.only&&who!=="all"&&day.only!==who;
+    var short=dayLabel(day.d,{weekday:"short",day:"numeric",month:"short"});
+    nav+='<a href="#d-'+day.d+'" data-d="'+day.d+'"'+(hide?" hidden":"")+'>'+dayLabel(day.d,{day:"numeric",month:"short"})+'<small>'+dayLabel(day.d,{weekday:"short"})+'</small></a>';
+    if(hide)return;
+    var tags=(day.tags||[]).map(function(t){return "<li>"+esc(t)+"</li>";});
+    if(day.z!=="VN")tags.unshift("<li>"+TZN[day.z]+" time</li>");
+    if(day.guide)tags.push('<li class="g"><a href="../../#'+day.guide+'" target="_top">Open the '+GNAME[day.guide]+' →</a></li>');
+    if(day.only)tags.push("<li>Jones only</li>");
+    html+='<section class="day" id="d-'+day.d+'" aria-labelledby="h-'+day.d+'"><div class="dayhead"><h2 id="h-'+day.d+'">'+dayLabel(day.d,{weekday:"long",day:"numeric",month:"long"})+'</h2><span class="where">'+esc(day.city)+'</span></div>'
+      +(tags.length?'<ul class="daytags">'+tags.join("")+'</ul>':'')+listHTML(day.items);
+    if(day.split){
+      if(who==="all"){
+        html+=(day.items.length?'<p class="splitnote">From 13:30 you go separate ways.</p>':'')+'<div class="split">'
+          +'<div class="track"><h3><span class="pill">Bala &amp; Antony</span></h3>'+listHTML(day.split.ba)+'</div>'
+          +'<div class="track"><h3><span class="pill">Jones</span></h3>'+listHTML(day.split.j)+'</div></div>';
+      }else{
+        html+='<div class="split one"><div class="track">'+(day.items.length?'<h3><span class="pill">'+(who==="ba"?"Bala &amp; Antony":"Jones")+'</span> from 13:30</h3>':'')+listHTML(day.split[who])+'</div></div>';
+      }
+    }
+    (day.boxes||[]).forEach(function(b){
+      if(who==="ba"&&/^Jones/.test(b.h))return;
+      html+='<div class="box '+b.k+'"><b>'+esc(b.h)+'.</b> '+(b.l.length===1?b.l[0]:'<ul><li>'+b.l.join("</li><li>")+'</li></ul>')+'</div>';
+    });
+    html+='</section>';
+  });
+  document.getElementById("days").innerHTML=html;
+  document.getElementById("daynav").innerHTML=nav;
+  document.getElementById("prep").innerHTML=PREP.filter(function(x){return who==="all"||x.who==="All"||(who==="ba"?x.who==="Bala & Antony":x.who==="Jones");}).map(function(x,i){
+    var k="prep-"+PREP.indexOf(x),c=false;try{c=localStorage.getItem(k)==="1";}catch(e){}
+    return '<li><label><input type="checkbox" data-k="'+k+'"'+(c?" checked":"")+'><span><span class="who'+(x.crit?" crit":"")+'">'+esc(x.who)+'</span>'+x.t+'</span></label></li>';
+  }).join("");
+  document.getElementById("ics-l").textContent=who==="all"?"Add to my calendar":who==="ba"?"Add Bala & Antony's plan to calendar":"Add Jones's plan to calendar";
+  tick();
+}
+
+/* ---------- now and next ---------- */
+function rel(ms){var m=Math.round(ms/60000);if(m<60)return m+" min";var h=Math.floor(m/60),r=m%60;if(h<24)return h+" h"+(r?" "+r+" min":"");var d=Math.round(h/24);return d+" day"+(d>1?"s":"");}
+function at(it){return it.t+" "+dayLabel(it.day.d,{weekday:"short",day:"numeric",month:"short"})+(it.z&&it.z!==it.day.z?" ("+TZN[it.z]+" time)":"");}
+function plain(s){var d=document.createElement("div");d.innerHTML=s;return d.textContent;}
+function status(p){
+  var tl=timeline(p),t=now(),cur=null,next=null;
+  for(var i=0;i<tl.length;i++){if(tl[i].ts<=t)cur=tl[i];else{next=tl[i];break;}}
+  return {cur:cur,next:next,first:tl[0],last:tl[tl.length-1]};
+}
+function tick(){
+  var box=document.getElementById("now"),t=now(),people=who==="all"?["ba","j"]:[who];
+  var st=people.map(status),first=st[0].first;
+  document.querySelectorAll(".it").forEach(function(el){el.classList.remove("is-now","past");var f=el.querySelector(".flagslot");if(f)f.innerHTML="";});
+  if(t<first.ts){
+    box.innerHTML='<div><p class="lab">Before the trip</p><p class="big">Leaving in '+rel(first.ts-t)+'</p><p class="sm">First up: '+esc(plain(first.w))+', '+at(first)+'. Work through "Before you fly" below first.</p></div>';
+    markToday(null);return;
+  }
+  var allDone=st.every(function(s){return !s.next&&t>s.last.ts+6*3600000;});
+  if(allDone){box.innerHTML='<div><p class="lab">Trip complete</p><p class="big">Welcome home.</p><p class="sm">Everything below stays here as a record of the trip.</p></div>';markToday(null);return;}
+  var same=st.length===2&&st[0].cur===st[1].cur&&st[0].next===st[1].next;
+  var rows=(same?[st[0]]:st).map(function(s,i){
+    var label=same||st.length===1?"":'<span class="who">'+(people[i]==="ba"?"Bala &amp; Antony":"Jones")+'</span>';
+    if(!s.next&&s.cur)return '<div>'+label+'<p class="lab">Last stop</p><p class="big">'+esc(plain(s.cur.w))+'</p><p class="sm">'+at(s.cur)+'</p></div>';
+    return '<div>'+label+(s.cur?'<p class="lab">Now</p><p class="big">'+esc(plain(s.cur.w))+'</p><p class="sm">Since '+s.cur.t+'</p>':'')
+      +(s.next?'<p class="lab" style="margin-top:10px">Next, in '+rel(s.next.ts-t)+'</p><p class="big" style="font-size:18px">'+esc(plain(s.next.w))+'</p><p class="sm">'+at(s.next)+'</p>':'')+'</div>';
+  });
+  box.innerHTML='<div class="row">'+rows.join("")+'</div><a class="jump" href="#">Jump to now ↓</a>';
+  var focus=null;
+  st.forEach(function(s){
+    timeline(people[st.indexOf(s)]).forEach(function(it){var el=document.getElementById("i-"+it.id);if(el&&it.ts<t&&it!==s.cur)el.classList.add("past");});
+    if(s.cur){var el=document.getElementById("i-"+s.cur.id);if(el){el.classList.add("is-now");el.querySelector(".flagslot").innerHTML='<span class="flag">Now</span>';focus=focus||el;}}
+    if(s.next){var n=document.getElementById("i-"+s.next.id);if(n&&!n.querySelector(".flag"))n.querySelector(".flagslot").innerHTML='<span class="flag next">Next</span>';}
+  });
+  var j=box.querySelector(".jump");
+  j.addEventListener("click",function(e){e.preventDefault();if(focus)focus.scrollIntoView({block:"center",behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});});
+  markToday(focus?focus.closest("section.day").id.slice(2):null);
+  return focus;
+}
+function markToday(d){document.querySelectorAll("nav.days a").forEach(function(a){a.classList.toggle("today",a.dataset.d===d);});}
+
+/* ---------- calendar export ---------- */
+function icsDate(ms){return new Date(ms).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");}
+function icsText(s){return plain(s).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");}
+function fold(line){var out="",n=0;for(var i=0;i<line.length;i++){out+=line[i];n++;if(n>=72&&i<line.length-1){out+="\r\n ";n=0;}}return out;}
+function exportICS(){
+  var p=who==="all"?null:who,list=[];
+  DAYS.forEach(function(day){
+    if(day.only&&p&&day.only!==p)return;
+    list=list.concat(day.items);
+    if(day.split){if(p)list=list.concat(day.split[p]);else list=list.concat(day.split.ba.map(function(i){return Object.assign({},i,{w:"Bala & Antony: "+i.w});}),day.split.j.map(function(i){return Object.assign({},i,{w:"Jones: "+i.w});}));}
+  });
+  var L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Vietnam Field Guides//Itinerary//EN","CALSCALE:GREGORIAN","X-WR-CALNAME:Vietnam trip"];
+  list.forEach(function(it,i){
+    var end=it.e?Date.parse(it.day.d+"T"+it.e+":00"+TZ[it.z||it.day.z]):it.ts+30*60000;
+    L.push("BEGIN:VEVENT","UID:"+it.id+(it.track||"")+"-"+i+"@vietnam-guides","DTSTAMP:"+icsDate(Date.now()),"DTSTART:"+icsDate(it.ts),"DTEND:"+icsDate(end),
+      fold("SUMMARY:"+icsText(it.w)));
+    var desc=(it.k==="s"?"Suggested. ":"")+(it.n?plain(it.n):"");
+    if(desc)L.push(fold("DESCRIPTION:"+icsText(desc)));
+    if(it.m)L.push(fold("LOCATION:"+icsText(it.m)));
+    if(it.a)L.push("BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+icsText(it.w),"TRIGGER:-PT45M","END:VALARM");
+    L.push("END:VEVENT");
+  });
+  L.push("END:VCALENDAR");
+  var blob=new Blob([L.join("\r\n")],{type:"text/calendar"}),a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);a.download="vietnam-trip"+(p?"-"+(p==="ba"?"bala-antony":"jones"):"")+".ics";
+  document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},1000);
+}
+
+/* ---------- wiring ---------- */
+document.querySelectorAll(".chips button").forEach(function(b){
+  b.setAttribute("aria-pressed",String(b.dataset.p===who));
+  b.addEventListener("click",function(){
+    who=b.dataset.p;try{localStorage.setItem("itin-who",who);}catch(e){}
+    document.querySelectorAll(".chips button").forEach(function(x){x.setAttribute("aria-pressed",String(x===b));});
+    render();
+  });
+});
+document.getElementById("prep").addEventListener("change",function(e){var k=e.target.dataset.k;if(k){try{localStorage.setItem(k,e.target.checked?"1":"0");}catch(err){}}});
+document.getElementById("ics").addEventListener("click",exportICS);
+render();
+setInterval(tick,60000);
+/* during the trip, open on the current item */
+(function(){var f=document.querySelector(".it.is-now");if(f&&!location.hash)setTimeout(function(){f.scrollIntoView({block:"center"});},50);})();
+</script>
+</body>
+</html>

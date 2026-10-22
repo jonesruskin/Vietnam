@@ -86,12 +86,12 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--accent-dot);outline
   .side{grid-row:2;flex-direction:row;align-items:stretch;gap:6px;padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));border-right:0;border-top:1px solid var(--line);overflow:visible}
   .brand,.navlabel,.foot{display:none}
   .side nav{flex:1;min-width:0}
-  .nav{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);height:100%}
-  .nav a{grid-template-columns:22px minmax(0,1fr);gap:0 8px;padding:7px 10px;border-radius:12px;min-height:48px}
-  .nav .ring{width:22px;height:22px}
-  .nav .ring::after{width:7px;height:7px;box-shadow:0 0 0 3px color-mix(in srgb,var(--ci) 30%,transparent)}
-  .nav .en{font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .nav .vn{font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);height:100%;gap:4px}
+  .nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 4px;border-radius:12px;min-height:52px;text-align:center}
+  .nav .ring{width:16px;height:16px;flex:none}
+  .nav .ring::after{width:6px;height:6px;box-shadow:0 0 0 2px color-mix(in srgb,var(--ci) 30%,transparent)}
+  .nav .en{font-size:13.5px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav .vn{font-size:11px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .nav .rg{display:none}
   .mob-off{display:grid;place-content:center;justify-items:center;gap:1px;flex:none;width:56px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;cursor:pointer;padding:0}
   .mob-off svg{width:20px;height:20px}
@@ -107,12 +107,12 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--accent-dot);outline
 </head>
 <body>
 <div class="app">
-  <aside class="side" aria-label="Guides">
+  <aside class="side" aria-label="Trip">
     <a class="brand" href="./">
       <img src="icon.svg" alt="" width="34" height="34">
       <span><b>Vietnam</b><span>Field guides for the trip</span></span>
     </a>
-    <p class="navlabel" id="navlabel">Guides</p>
+    <p class="navlabel" id="navlabel">Trip</p>
     <nav aria-labelledby="navlabel"><ul class="nav" id="nav"></ul></nav>
     <button type="button" class="mob-off" id="mob-off" aria-expanded="false" aria-controls="sheet"><span id="mob-off-i" aria-hidden="true"></span><small>Offline</small></button>
 
@@ -123,7 +123,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--accent-dot);outline
         <p>Vietnam is 1 h 30 min ahead of India.</p>
       </div>
       <div id="off-slot"></div>
-      <p class="solo"><a id="solo" href="guides/hanoi/index.html" target="_blank" rel="noopener">Open this guide on its own</a></p>
+      <p class="solo"><a id="solo" href="guides/hanoi/index.html" target="_blank" rel="noopener">Open this page on its own</a></p>
     </div>
   </aside>
 
@@ -135,16 +135,17 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--accent-dot);outline
 <div class="sheet" id="sheet"></div>
 <template id="off-tpl">
   <div class="off" id="off">
-    <p id="off-msg">Save both guides on this device so maps, food lists and photos work without signal.</p>
+    <p id="off-msg">Save the itinerary and both guides on this device so they work without signal.</p>
     <div class="meter" id="off-meter" hidden><i id="off-bar"></i></div>
     <button type="button" class="btn" id="off-btn">Save for offline</button>
   </div>
 </template>
 
 <script>
-/* To add a tab (for example the itinerary), put its page at guides/<id>/index.html
+/* To add a tab, put its page at guides/<id>/index.html
    and add one entry here (region is optional). Colours: c = tab background, ci = text on it, d = dot. */
 var GUIDES=[
+  {id:"itinerary", en:"Itinerary", vn:"Lịch trình", region:"day by day", c:"#5A2E3A", ci:"#F7E9EC", d:"#E7849C"},
   {id:"hanoi", en:"Hanoi", vn:"Hà Nội", region:"the north", c:"#1D4A3C", ci:"#F4ECD4", d:"#E0A52C"},
   {id:"danang", en:"Da Nang", vn:"Đà Nẵng", region:"the centre", c:"#13414F", ci:"#F2EEE2", d:"#E9813F"}
 ];
@@ -159,15 +160,18 @@ var GUIDES=[
       +'<span class="ring" aria-hidden="true"></span><span class="en">'+g.en+'</span><span class="vn"><span lang="vi">'+g.vn+'</span>'+(g.region?'<span class="rg"> · '+g.region+'</span>':'')+'</span></a></li>';
   }).join("");
 
-  function show(id){
+  /* #hanoi opens a guide; #hanoi/food also scrolls it to a section */
+  function show(id,sec){
     var g=find(id)||GUIDES[0];
-    if(current===g.id)return;
-    current=g.id;
     var f=frames[g.id];
-    if(!f){
+    function jump(){if(f&&sec){try{f.contentWindow.location.hash=sec;}catch(e){}}}
+    if(current===g.id){jump();return;}
+    current=g.id;
+    var fresh=!f;
+    if(fresh){
       f=document.createElement("iframe");
-      f.title=g.en+" guide";
-      f.src=page(g);
+      f.title=g.en+(g.id==="itinerary"?"":" guide");
+      f.src=page(g)+(sec?"#"+sec:"");
       stage.classList.add("busy");
       f.addEventListener("load",function(){if(current===g.id)stage.classList.remove("busy");});
       stage.appendChild(f);
@@ -176,6 +180,7 @@ var GUIDES=[
       stage.classList.remove("busy");
     }
     for(var k in frames)frames[k].hidden=(k!==g.id);
+    if(!fresh)jump();
     [].forEach.call(nav.querySelectorAll("a"),function(a){
       if(a.dataset.id===g.id)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
     });
@@ -183,7 +188,7 @@ var GUIDES=[
     document.title=g.en+" · Vietnam Field Guides";
     document.getElementById("solo").href=page(g);
   }
-  function route(){show(location.hash.slice(1));}
+  function route(){var h=location.hash.slice(1).split("/");show(h[0],h[1]);}
   window.addEventListener("hashchange",route);
   route();
 })();
@@ -225,7 +230,7 @@ var GUIDES=[
   function when(t){try{return new Date(t).toLocaleDateString(undefined,{day:"numeric",month:"short"});}catch(e){return "";}}
   function saved(info){
     msg.className="done";
-    msg.innerHTML="<b>Saved on this device.</b> Both guides open without signal"+(info&&info.bytes?" ("+mb(info.bytes)+", "+when(info.at)+")":"")+".";
+    msg.innerHTML="<b>Saved on this device.</b> Everything opens without signal"+(info&&info.bytes?" ("+mb(info.bytes)+", "+when(info.at)+")":"")+".";
     btn.textContent="Update saved copy";btn.className="btn ghost";btn.disabled=false;meter.hidden=true;mobState("ok");
   }
   caches.open(CACHE).then(function(c){return c.match(MARK);}).then(function(r){return r&&r.json();}).then(function(info){if(info)saved(info);}).catch(function(){});
