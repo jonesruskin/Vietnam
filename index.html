@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vietnam Field Guides</title>
+<meta name="description" content="Hanoi and Da Nang travel guides: maps, food, prices and getting around, usable offline.">
+<meta name="theme-color" content="#F2F1EA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101613" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F1EA;--card:#FFFFFF;--ink:#16211C;--muted:#55605A;--line:#D8D5C8;
+  --side:#E9E7DD;--ok:#2E6B3A;
+  --accent:#1D4A3C;--accent-ink:#F4ECD4;--accent-dot:#E0A52C;
+  --side-w:252px;--bar-h:62px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#101613;--card:#18201C;--ink:#ECEDE5;--muted:#A2ACA5;--line:#2B3631;--side:#0B100E;--ok:#9AD3A3;}}
+:root[data-theme="dark"]{--paper:#101613;--card:#18201C;--ink:#ECEDE5;--muted:#A2ACA5;--line:#2B3631;--side:#0B100E;--ok:#9AD3A3;}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow:hidden}
+a,button{-webkit-tap-highlight-color:transparent}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent-dot);outline-offset:2px}
+.app{display:grid;grid-template-columns:var(--side-w) minmax(0,1fr);height:100vh;height:100dvh}
+
+/* sidebar */
+.side{background:var(--side);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;padding:22px 14px 16px;overflow-y:auto}
+.brand{display:flex;align-items:center;gap:10px;padding:0 8px 22px;text-decoration:none;color:var(--ink)}
+.brand img{width:34px;height:34px;flex:none}
+.brand b{display:block;font-size:19px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.brand span{display:block;font-size:12.5px;color:var(--muted)}
+.navlabel{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 10px 8px}
+.nav{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.nav a{position:relative;display:grid;grid-template-columns:30px minmax(0,1fr);gap:2px 10px;align-items:center;padding:10px 12px;border-radius:14px;text-decoration:none;color:var(--ink);border:1px solid transparent}
+.nav a:hover{border-color:var(--line);background:var(--card)}
+.nav .ring{grid-row:span 2;width:30px;height:30px;border-radius:50%;background:var(--c);display:grid;place-items:center}
+.nav .ring::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--d);box-shadow:0 0 0 4px color-mix(in srgb,var(--ci) 30%,transparent)}
+.nav .en{font-weight:700;font-size:15.5px;letter-spacing:-.01em;line-height:1.15}
+.nav .vn{font-size:12.5px;color:var(--muted);line-height:1.2}
+.nav a[aria-current="page"]{background:var(--c);color:var(--ci);border-color:var(--c)}
+.nav a[aria-current="page"] .vn{color:color-mix(in srgb,var(--ci) 70%,transparent)}
+.nav a[aria-current="page"] .ring{background:color-mix(in srgb,var(--ci) 14%,transparent)}
+
+.foot{margin-top:auto;padding-top:22px;display:grid;gap:12px}
+.clock{margin:0 4px;padding:12px 12px;border-radius:14px;border:1px solid var(--line);background:var(--card);display:grid;grid-template-columns:1fr 1fr;gap:4px 10px}
+.clock div{min-width:0}
+.clock small{display:block;font-size:11.5px;color:var(--muted)}
+.clock time{font-size:18px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.clock p{grid-column:1/-1;margin:2px 0 0;font-size:12px;color:var(--muted)}
+
+.off{margin:0 4px;padding:12px;border-radius:14px;border:1px solid var(--line);background:var(--card)}
+.off p{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.off p b{color:var(--ink);font-weight:700}
+.off p.done b{color:var(--ok)}
+.btn{font:inherit;font-size:14px;font-weight:700;width:100%;min-height:40px;border-radius:999px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;padding:8px 14px}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn:disabled{opacity:.6;cursor:progress}
+.meter{height:6px;border-radius:999px;background:var(--line);overflow:hidden;margin:0 0 10px}
+.meter i{display:block;height:100%;width:0;background:var(--accent-dot);transition:width .2s}
+.solo{margin:0 10px;font-size:12.5px;color:var(--muted)}
+.solo a{color:inherit}
+
+/* guide frames */
+.stage{position:relative;min-width:0;min-height:0;background:var(--paper)}
+.stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:var(--paper);display:block}
+.stage iframe[hidden]{display:none}
+.loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:14px;pointer-events:none;opacity:0;transition:opacity .2s}
+.stage.busy .loading{opacity:1}
+.loading span::before{content:"";display:block;width:34px;height:34px;margin:0 auto 10px;border-radius:50%;border:3px dashed var(--line);border-top-color:var(--accent-dot);animation:spin 1.2s linear infinite}
+@keyframes spin{to{transform:rotate(1turn)}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mob-off{display:none}
+
+/* phones: the sidebar becomes a bottom tab bar, within thumb reach */
+@media (max-width:760px){
+  .app{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto}
+  .stage{grid-row:1;padding-top:env(safe-area-inset-top,0px)}
+  .stage iframe{top:env(safe-area-inset-top,0px);height:calc(100% - env(safe-area-inset-top,0px))}
+  .side{grid-row:2;flex-direction:row;align-items:stretch;gap:6px;padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));border-right:0;border-top:1px solid var(--line);overflow:visible}
+  .brand,.navlabel,.foot{display:none}
+  .side nav{flex:1;min-width:0}
+  .nav{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);height:100%}
+  .nav a{grid-template-columns:22px minmax(0,1fr);gap:0 8px;padding:7px 10px;border-radius:12px;min-height:48px}
+  .nav .ring{width:22px;height:22px}
+  .nav .ring::after{width:7px;height:7px;box-shadow:0 0 0 3px color-mix(in srgb,var(--ci) 30%,transparent)}
+  .nav .en{font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav .vn{font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav .rg{display:none}
+  .mob-off{display:grid;place-content:center;justify-items:center;gap:1px;flex:none;width:56px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;cursor:pointer;padding:0}
+  .mob-off svg{width:20px;height:20px}
+  .mob-off small{font-size:10.5px;font-weight:600;line-height:1}
+  .mob-off.saved{color:var(--ok)}
+  .mob-off .pct{font-size:11.5px;font-weight:800}
+  .sheet{position:fixed;left:8px;right:8px;bottom:calc(var(--bar-h) + 8px + env(safe-area-inset-bottom,0px));z-index:10;display:none}
+  .sheet.open{display:block}
+  .sheet .off{margin:0;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+}
+@media (prefers-reduced-motion:reduce){.meter i,.loading{transition:none}.loading span::before{animation:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side" aria-label="Guides">
+    <a class="brand" href="./">
+      <img src="icon.svg" alt="" width="34" height="34">
+      <span><b>Vietnam</b><span>Field guides for the trip</span></span>
+    </a>
+    <p class="navlabel" id="navlabel">Guides</p>
+    <nav aria-labelledby="navlabel"><ul class="nav" id="nav"></ul></nav>
+    <button type="button" class="mob-off" id="mob-off" aria-expanded="false" aria-controls="sheet"><span id="mob-off-i" aria-hidden="true"></span><small>Offline</small></button>
+
+    <div class="foot">
+      <div class="clock" aria-label="Local times">
+        <div><small>Vietnam</small><time id="t-vn">--:--</time></div>
+        <div><small>India</small><time id="t-in">--:--</time></div>
+        <p>Vietnam is 1 h 30 min ahead of India.</p>
+      </div>
+      <div id="off-slot"></div>
+      <p class="solo"><a id="solo" href="guides/hanoi/index.html" target="_blank" rel="noopener">Open this guide on its own</a></p>
+    </div>
+  </aside>
+
+  <main class="stage" id="stage">
+    <div class="loading" aria-hidden="true"><span>Loading guide</span></div>
+  </main>
+</div>
+
+<div class="sheet" id="sheet"></div>
+<template id="off-tpl">
+  <div class="off" id="off">
+    <p id="off-msg">Save both guides on this device so maps, food lists and photos work without signal.</p>
+    <div class="meter" id="off-meter" hidden><i id="off-bar"></i></div>
+    <button type="button" class="btn" id="off-btn">Save for offline</button>
+  </div>
+</template>
+
+<script>
+/* To add a tab (for example the itinerary), put its page at guides/<id>/index.html
+   and add one entry here (region is optional). Colours: c = tab background, ci = text on it, d = dot. */
+var GUIDES=[
+  {id:"hanoi", en:"Hanoi", vn:"Hà Nội", region:"the north", c:"#1D4A3C", ci:"#F4ECD4", d:"#E0A52C"},
+  {id:"danang", en:"Da Nang", vn:"Đà Nẵng", region:"the centre", c:"#13414F", ci:"#F2EEE2", d:"#E9813F"}
+];
+
+(function(){
+  var nav=document.getElementById("nav"),stage=document.getElementById("stage"),frames={},current=null;
+  function page(g){return "guides/"+g.id+"/index.html";}
+  function find(id){for(var i=0;i<GUIDES.length;i++)if(GUIDES[i].id===id)return GUIDES[i];return null;}
+
+  nav.innerHTML=GUIDES.map(function(g){
+    return '<li><a href="#'+g.id+'" data-id="'+g.id+'" style="--c:'+g.c+';--ci:'+g.ci+';--d:'+g.d+'">'
+      +'<span class="ring" aria-hidden="true"></span><span class="en">'+g.en+'</span><span class="vn"><span lang="vi">'+g.vn+'</span>'+(g.region?'<span class="rg"> · '+g.region+'</span>':'')+'</span></a></li>';
+  }).join("");
+
+  function show(id){
+    var g=find(id)||GUIDES[0];
+    if(current===g.id)return;
+    current=g.id;
+    var f=frames[g.id];
+    if(!f){
+      f=document.createElement("iframe");
+      f.title=g.en+" guide";
+      f.src=page(g);
+      stage.classList.add("busy");
+      f.addEventListener("load",function(){if(current===g.id)stage.classList.remove("busy");});
+      stage.appendChild(f);
+      frames[g.id]=f;
+    }else{
+      stage.classList.remove("busy");
+    }
+    for(var k in frames)frames[k].hidden=(k!==g.id);
+    [].forEach.call(nav.querySelectorAll("a"),function(a){
+      if(a.dataset.id===g.id)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
+    });
+    document.documentElement.style.setProperty("--accent-dot",g.d);
+    document.title=g.en+" · Vietnam Field Guides";
+    document.getElementById("solo").href=page(g);
+  }
+  function route(){show(location.hash.slice(1));}
+  window.addEventListener("hashchange",route);
+  route();
+})();
+
+/* local times */
+(function(){
+  function fmt(tz){try{return new Intl.DateTimeFormat("en-GB",{hour:"2-digit",minute:"2-digit",timeZone:tz}).format(new Date());}catch(e){return "--:--";}}
+  function tick(){document.getElementById("t-vn").textContent=fmt("Asia/Ho_Chi_Minh");document.getElementById("t-in").textContent=fmt("Asia/Kolkata");}
+  tick();setInterval(tick,20000);
+})();
+
+/* offline: a service worker serves saved copies; "Save for offline" downloads every page and photo up front */
+(function(){
+  var CACHE="vietnam-v1",MARK="offline-saved.json";
+  var tpl=document.getElementById("off-tpl"),slot=document.getElementById("off-slot"),sheet=document.getElementById("sheet");
+  var mob=document.getElementById("mob-off"),mobI=document.getElementById("mob-off-i");
+  var narrow=matchMedia("(max-width:760px)");
+  slot.appendChild(tpl.content.cloneNode(true));
+  var box=document.getElementById("off"),msg=document.getElementById("off-msg"),btn=document.getElementById("off-btn"),meter=document.getElementById("off-meter"),bar=document.getElementById("off-bar");
+  function place(){(narrow.matches?sheet:slot).appendChild(box);}
+  place();
+  if(narrow.addEventListener)narrow.addEventListener("change",place);
+
+  var ICON_DL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>';
+  var ICON_OK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
+  function mobState(kind,pct){mobI.innerHTML=kind==="ok"?ICON_OK:kind==="pct"?'<span class="pct">'+pct+'%</span>':ICON_DL;mob.classList.toggle("saved",kind==="ok");}
+  mobState("dl");
+  mob.addEventListener("click",function(){var o=!sheet.classList.contains("open");sheet.classList.toggle("open",o);mob.setAttribute("aria-expanded",String(o));});
+  document.addEventListener("click",function(e){if(sheet.classList.contains("open")&&!sheet.contains(e.target)&&!mob.contains(e.target)){sheet.classList.remove("open");mob.setAttribute("aria-expanded","false");}});
+
+  var supported="serviceWorker" in navigator&&"caches" in window&&location.protocol!=="file:";
+  if(!supported){
+    msg.textContent="Offline saving needs the published site (https). It isn't available when the file is opened directly.";
+    btn.hidden=true;mob.hidden=true;return;
+  }
+  navigator.serviceWorker.register("sw.js").catch(function(){});
+
+  function mb(n){return (n/1048576).toFixed(n>10485760?0:1)+" MB";}
+  function when(t){try{return new Date(t).toLocaleDateString(undefined,{day:"numeric",month:"short"});}catch(e){return "";}}
+  function saved(info){
+    msg.className="done";
+    msg.innerHTML="<b>Saved on this device.</b> Both guides open without signal"+(info&&info.bytes?" ("+mb(info.bytes)+", "+when(info.at)+")":"")+".";
+    btn.textContent="Update saved copy";btn.className="btn ghost";btn.disabled=false;meter.hidden=true;mobState("ok");
+  }
+  caches.open(CACHE).then(function(c){return c.match(MARK);}).then(function(r){return r&&r.json();}).then(function(info){if(info)saved(info);}).catch(function(){});
+
+  function list(){
+    var urls=["./","index.html","icon.svg","icon-180.png","icon-192.png","icon-512.png","manifest.webmanifest"];
+    return Promise.all(GUIDES.map(function(g){
+      var base="guides/"+g.id+"/";
+      urls.push(base+"index.html");
+      return fetch(base+"index.html",{cache:"no-cache"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.text();}).then(function(html){
+        var m=/PHS\.add\((\{[^)]*\})\)/.exec(html);
+        if(m){var map=JSON.parse(m[1]);for(var k in map)urls.push(base+map[k]);}
+      });
+    })).then(function(){return urls;});
+  }
+  function fonts(cache){
+    var css="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&display=swap";
+    return fetch(css,{mode:"cors"}).then(function(r){
+      if(!r.ok)return;
+      return r.clone().text().then(function(t){
+        var files=t.match(/https:\/\/fonts\.gstatic\.com\/[^)'"\s]+/g)||[];
+        return cache.put(css,r).then(function(){return Promise.all(files.map(function(u){return fetch(u,{mode:"cors"}).then(function(fr){if(fr.ok)return cache.put(u,fr);});}));});
+      });
+    }).catch(function(){});
+  }
+
+  btn.addEventListener("click",function(){
+    btn.disabled=true;btn.textContent="Saving…";meter.hidden=false;bar.style.width="0";msg.className="";
+    msg.textContent="Downloading pages and photos. Keep this tab open.";
+    if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(function(){});
+    var cache,urls,done=0,bytes=0,failed=0;
+    caches.open(CACHE).then(function(c){cache=c;return list();}).then(function(u){
+      urls=u;var i=0;
+      function worker(){
+        if(i>=urls.length)return Promise.resolve();
+        var url=urls[i++];
+        return fetch(url,{cache:"no-cache"}).then(function(r){
+          if(!r.ok)throw new Error(r.status);
+          return r.clone().blob().then(function(b){bytes+=b.size;return cache.put(url,r);});
+        }).catch(function(){failed++;}).then(function(){
+          done++;var p=Math.round(done/urls.length*100);bar.style.width=p+"%";btn.textContent="Saving… "+p+"%";mobState("pct",p);
+          return worker();
+        });
+      }
+      var pool=[];for(var w=0;w<6;w++)pool.push(worker());
+      return Promise.all(pool).then(function(){return fonts(cache);});
+    }).then(function(){
+      if(failed){throw new Error(failed+" files didn't download");}
+      var info={at:Date.now(),bytes:bytes,count:urls.length};
+      return cache.put(MARK,new Response(JSON.stringify(info),{headers:{"Content-Type":"application/json"}})).then(function(){saved(info);});
+    }).catch(function(err){
+      msg.className="";msg.innerHTML="<b>Couldn't finish saving.</b> "+(err&&err.message?err.message+". ":"")+"Check your connection and try again.";
+      btn.disabled=false;btn.textContent="Try again";btn.className="btn";meter.hidden=true;mobState("dl");
+    });
+  });
+})();
+</script>
+</body>
+</html>
