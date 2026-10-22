@@ -14,7 +14,7 @@ guides/danang/          Da Nang guide page + photos/
 tools/import_guide.py   turns an exported guide page into guides/<slug>/
 ```
 
-Each guide is the original page with two changes: its photos are stored as separate `.webp` files instead of being embedded, and its link to the other guide switches tabs instead of opening claude.ai. The Da Nang guide also has one fact fix: the Dragon Bridge show now runs Friday to Sunday. Re-apply it if you re-import that guide. That cuts each page from 7–11 MB to about 130 KB. Photos load as you scroll.
+Each guide is the original page with two changes: its photos are stored as separate `.webp` files instead of being embedded, and its link to the other guide switches tabs instead of opening claude.ai. That cuts each page from 7–11 MB to about 130 KB. Photos load as you scroll. The Da Nang guide also has one fact fix: the Dragon Bridge show now runs Friday to Sunday. Re-apply it if you re-import that guide.
 
 ## Hosting on GitHub Pages
 
