@@ -104,6 +104,8 @@ section.day{padding:30px 0 6px}
 .it .cost .inr{font-weight:500;color:var(--ochre-ink);margin-left:4px}
 .it .meta a{font-weight:600;text-decoration:none;border-bottom:2px solid var(--line)}
 .it .meta a:hover{border-color:currentColor}
+.it .or{margin:10px 0 0;padding:10px 12px;border:1px dashed var(--line);border-radius:12px}
+.it .or .what{font-size:15px}
 .it.past{opacity:.55}
 .it.is-now{background:var(--ochre-soft)}
 .it.is-now::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--ochre)}
@@ -177,15 +179,16 @@ var DAYS=[
 {d:"2026-10-25",z:"IN",city:"Chennai to Mumbai",items:[
  {t:"16:00",k:"b",w:"Chennai Airport",n:"Domestic check-in for the Mumbai flight.",a:1},
  {t:"19:15",k:"b",w:"Flight to Mumbai",a:1},
- {t:"21:35",k:"b",w:"Land in Mumbai",n:"Your Hanoi flight leaves at 04:10. Check whether your bags are checked through to Hanoi, then move to international departures. Counters usually open about 3 hours before an international flight."}
+ {t:"21:35",k:"b",w:"Land in Mumbai",n:"Your Hanoi flight leaves at 04:10. Check whether your bags are checked through to Hanoi, then move to international departures. Counters usually open about 3 hours before an international flight."},
+ {t:"22:00",k:"s",w:"Dinner at Mumbai airport",n:"Eat at a Terminal 2 food court while you wait for check-in, which usually opens about 3 hours before the 04:10 flight. After security, rest at the gate."}
 ]},
 {d:"2026-10-26",z:"VN",city:"Mumbai to Hanoi",guide:"hanoi",tags:["Monday","Sunset around 17:20"],items:[
- {t:"04:10",z:"IN",k:"b",w:"Flight to Hanoi",a:1},
+ {t:"04:10",z:"IN",k:"b",w:"Flight to Hanoi",n:"Breakfast is on board if your fare includes a meal; otherwise buy something airside before boarding.",a:1},
  {t:"10:00",k:"b",w:"Land at Noi Bai Airport, Hanoi",n:"Immigration with your e-visa can take 30–60 min. Buy a local SIM or eSIM in arrivals and draw some dong from an ATM for street food."},
  {t:"11:00",k:"b",w:"Grab to Bao Anh Hotel",n:"The hotel is at Cổ Linh in Long Biên, across the river from the Old Quarter, so every outing below starts with a short Grab ride.",p:[250000,350000,"per car; approximate"],m:"Bao Anh Hotel, Co Linh, Long Bien, Hanoi"},
- {t:"11:45",k:"b",w:"Lunch, freshen up, check in",n:"Standard check-in is usually 14:00, so ask the hotel in advance for an early check-in. Eat at or near the hotel."},
+ {t:"11:45",k:"b",w:"Lunch, freshen up, check in",n:"Standard check-in is usually 14:00, so ask the hotel in advance for an early check-in. For lunch, Aeon Mall Long Biên at 27 Cổ Linh, on the hotel's road, has a big food court with Vietnamese stalls: try a bowl of phở bò. Walk or take a short Grab, depending on where the hotel's lane comes out.",p:[50000,120000,"per person; approximate"],m:"Aeon Mall Long Bien, 27 Co Linh, Hanoi"},
  {t:"14:30",k:"b",w:"Grab to Train Street",n:"About 20–25 min from Long Biên.",p:[60000,120000,"per car; approximate"],g:["hanoi","city"]},
- {t:"14:55",k:"b",w:"Train Street",n:"Pick a café on the tracks and buy a drink: that's how you get a seat. The train is expected around 15:15, but weekday times shift, so ask the café staff when you sit down. Police sometimes close access; follow the staff's lead.",m:"Hanoi Train Street Phung Hung"},
+ {t:"14:55",k:"b",w:"Train Street",n:"Pick a café on the tracks and buy a drink, a cà phê sữa đá (iced milk coffee) or a salt coffee: that's how you get a seat. The train is expected around 15:15, but weekday times shift, so ask the café staff when you sit down. Police sometimes close access; follow the staff's lead.",m:"Hanoi Train Street Phung Hung"},
  {t:"15:35",k:"s",w:"Walk to Hoa Lo Prison, visit until 16:45",n:"A 10-minute walk. The colonial-era prison later nicknamed the Hanoi Hilton; allow about an hour. It closes at 17:00, so go straight here after the train.",p:[50000,0,"approximate"],m:"Hoa Lo Prison Relic, Hanoi",g:["hanoi","city"]},
  {t:"16:50",k:"s",w:"Hoan Kiem Lake and Ngoc Son Temple",n:"A 5-minute Grab ride. Cross the red Thê Húc bridge to the temple and stay for sunset over the lake. The temple closes at around 18:00.",p:[50000,0,"approximate"],m:"Ngoc Son Temple, Hanoi",g:["hanoi","city"]},
  {t:"17:45",k:"s",w:"Egg coffee at Café Đinh",n:"A 3-minute walk along the lake from Ngoc Son. Upstairs at 13 Đinh Tiên Hoàng, with a view over the water. Café Giảng, where egg coffee was invented, is a 10-minute walk away if Đinh is full.",p:[30000,45000],m:"Cafe Dinh, 13 Dinh Tien Hoang, Hanoi",g:["hanoi","food"]},
@@ -197,7 +200,7 @@ var DAYS=[
  {k:"tip",h:"Rather stay in the Old Quarter after dinner?",l:["Swap X Space for the water puppet show at Thang Long theatre (100,000–200,000 ₫, book a day ahead), then bia hơi on Tạ Hiện until 21:30. Hoan Kiem's walking street and night market only run Friday to Sunday, so they won't be on tonight."]}
 ]},
 {d:"2026-10-27",z:"VN",city:"Ha Long Bay cruise",guide:"hanoi",tags:["Alisa Premier Cruise","Sunset around 17:15"],items:[
- {t:"06:00",k:"b",w:"Wake up, get ready, breakfast, check out",n:"Your bags come with you from here, on the limousine and on board the cruise."},
+ {t:"06:00",k:"b",w:"Wake up, breakfast, check out",n:"Breakfast isn't included at Bao Anh, so eat what Hanoi eats: a bánh mì or xôi (sticky rice with toppings) from a street cart near the hotel. Carts are out from about 6 am; ask reception for the nearest. Your bags come with you from here, on the limousine and the cruise.",p:[25000,50000,"per person; approximate"]},
  {t:"07:30",k:"b",w:"Grab car with your bags to the limousine pickup",n:"172 Trần Quang Khải. Morning traffic from Long Biên takes 15–20 min, so leave on time.",p:[60000,120000,"per car; approximate"],m:"172 Tran Quang Khai, Hanoi",a:1},
  {t:"08:00",k:"b",w:"Limousine to Ha Long Bay",n:"Drop-off at Tuan Chau International Port, Quảng Ninh.",a:1},
  {t:"11:00",k:"b",w:"Reach Ha Long"},
@@ -219,7 +222,7 @@ var DAYS=[
  {t:"09:45",e:"10:30",k:"c",w:"Brunch"},
  {t:"10:30",k:"c",w:"Pay the bar bill",n:"At the 2nd-floor bar counter, for drinks and extras. Ask whether they take cards; carry dong just in case."},
  {t:"11:00",k:"c",w:"Disembark at Alisa Harbor",n:"Then take a Grab car or taxi with your bags to Ha Long Happy Travel, Tuan Chau, for the 12:30 pickup. It's on the same island; check the exact address with the crew before you leave the boat.",p:[50000,120000,"per car; approximate"],m:"Ha Long Happy Travel Tuan Chau"},
- {t:"12:30",k:"b",w:"Limousine to Ninh Binh",n:"Pickup at Ha Long Happy Travel, Tuan Chau.",a:1},
+ {t:"12:30",k:"b",w:"Limousine to Ninh Binh",n:"Pickup at Ha Long Happy Travel, Tuan Chau. Brunch on board carries you to dinner; buy water and a snack before the 3.5-hour ride.",a:1},
  {t:"16:00",k:"b",w:"Reach Ninh Binh, check in at Tam Coc Catalina",n:"Drop-off at Bưu điện Bích Động (the Bich Dong post office). The hotel is a short walk from there with your bags; take a Grab if it's raining. Check in and freshen up.",m:"Tam Coc Catalina Hotel, Ninh Binh"},
  {t:"17:00",k:"s",w:"Cycle the lanes around Tam Cốc at golden hour",n:"Most hotels here lend bicycles. It's too late for a boat (they stop in the late afternoon and you'd be on the river in the dark), but the light on the karst around sunset is the best of the day.",p:[0,50000,"bike hire, if not free; approximate"],g:["hanoi","map"]},
  {t:"18:00",k:"s",w:"Dinner: mountain goat and crispy rice",n:"Cycle or walk into Tam Cốc town. Ninh Binh's two specialities are dê núi (mountain goat, grilled or steamed with ginger) and cơm cháy (crispy rice cakes). Family Restaurant near the Tam Cốc boat pier is one long-running option. Otherwise search the map and pick a well-rated place on the main street.",p:[150000,250000,"per person; approximate"],m:"de nui restaurant Tam Coc Ninh Binh"},
@@ -228,25 +231,26 @@ var DAYS=[
 {d:"2026-10-29",z:"VN",city:"Ninh Binh to Hanoi to Da Nang",guide:"hanoi",tags:["Thursday","Long day: pack light"],items:[
  {t:"05:30",k:"s",w:"Grab car to Mua Cave (Hang Múa)",n:"About 10 min from the hotel. Few Grab drivers are around at dawn, so ask reception the night before to book a car.",p:[60000,100000,"per car; approximate"],m:"Hang Mua, Ninh Binh"},
  {t:"05:45",e:"07:15",k:"s",w:"Climb about 500 steps for sunrise",n:"The view straight down over the Tam Cốc river valley, with a dragon statue on the ridge. Gates open at around 06:00 and the sun rises just before. Cooler and emptier now than at any other time.",p:[100000],g:["hanoi","map"]},
- {t:"07:15",k:"s",w:"Grab car back to the hotel, breakfast",n:"You keep your room until checkout at 12:00, so there's no packing yet.",p:[60000,100000,"per car; approximate"]},
- {t:"08:10",k:"s",w:"Grab car to Tràng An boat pier",n:"About 15 min.",p:[80000,150000,"per car; approximate"],m:"Trang An boat wharf, Ninh Binh"},
+ {t:"07:15",k:"s",w:"One Grab car from Mua Cave straight to Tràng An",n:"About 15 min. Few drivers are around at dawn, so ask reception the night before to book a car for both legs, hotel to Mua Cave and Mua Cave to Tràng An. You keep your room until checkout at 12:00.",p:[80000,150000,"per car; approximate"],m:"Trang An boat wharf, Ninh Binh"},
+ {t:"07:30",k:"s",w:"Breakfast near the Tràng An pier",n:"Breakfast isn't included at the Catalina. Have phở or bánh cuốn (steamed rice rolls) at one of the small eateries around the pier and ticket area, which open early for the boat crowds. Pick one by its ratings on the map.",p:[40000,70000,"per person; approximate"],m:"pho near Trang An wharf Ninh Binh"},
  {t:"08:30",e:"11:15",k:"s",w:"Tràng An boat ride",n:"A UNESCO site: a rower takes you along the river and through low caves to island temples, 2.5–3 hours. Arriving early on a weekday beats the queues. This is the boat ride to choose if you only do one.",p:[250000,0,"per person, boat included"],g:["hanoi","map"]},
  {t:"11:20",k:"s",w:"Grab car back to the hotel, pack, check out by 12:00",n:"About 15 min. From here your bags are with you until Da Nang tonight.",p:[80000,150000,"per car; approximate"]},
  {t:"12:15",k:"s",w:"Lunch in Tam Cốc",n:"Walk with your bags to a restaurant on the main street, close to the pickup point. Have cơm cháy if you skipped it last night, or miến lươn (glass noodles with eel), another Ninh Binh dish. Pick one by its ratings on the map.",p:[100000,200000,"per person; approximate"],m:"restaurant Tam Coc Ninh Binh"},
- {t:"13:30",k:"s",w:"Slow afternoon at a riverside café",n:"Coffee with the karst in view, a short walk from the pickup point. With bags in tow, this beats climbing to a pagoda."},
- {t:"15:10",k:"s",w:"Walk to Bưu điện Bích Động for the pickup"},
+ {t:"13:30",k:"s",w:"Bích Động Pagoda, with your bags",n:"A Grab car, about 5–10 min. A pagoda built into a cliff on three levels, up stone steps, with views over the rice fields and karst. Backpacks are fine on the steps; allow about an hour. Free to enter.",p:[50000,100000,"per car, each way; approximate"],m:"Bich Dong Pagoda, Ninh Binh",or:{w:"Or take it easy at a riverside café",n:"Coffee with the karst in view, a short walk from the pickup point, if you'd rather not climb with bags."}},
+ {t:"14:45",k:"s",w:"Grab car back to the pickup point",n:"Bưu điện Bích Động; be there by 15:10."},
  {t:"15:25",k:"b",w:"Limousine to Hanoi",n:"Pickup at Bưu điện Bích Động.",a:1},
  {t:"17:25",k:"b",w:"Reach Hanoi",n:"Drop-off at 160 Trần Quang Khải."},
- {t:"17:30",k:"b",w:"Old Quarter and dinner",n:"Suggested: a 5-minute Grab with your bags to <b>Bún Chả Đắc Kim</b>, 1 Hàng Mành, for Hanoi's other signature dish: grilled pork, noodles, herbs and dipping broth. If there's time, pick up a bánh mì at Bánh Mì 25 (25 Hàng Cá) for the flight.",p:[60000,90000,"per bowl"],m:"Bun Cha Dac Kim, 1 Hang Manh, Hanoi",g:["hanoi","food"]},
- {t:"19:00",k:"b",w:"Grab to Noi Bai Airport",n:"Evening traffic can stretch the ride to an hour.",p:[250000,350000,"per car"],a:1},
+ {t:"17:30",k:"b",w:"Old Quarter and dinner",n:"Suggested: a 5-minute Grab with your bags to <b>Bún Chả Đắc Kim</b>, 1 Hàng Mành, for Hanoi's other signature dish: grilled pork, noodles, herbs and dipping broth. Then walk about 7 min with your bags to <b>Bánh Mì 25</b>, 25 Hàng Cá, Hanoi's best-known bánh mì, and take one each for the airport. This is your bánh mì stop in Hanoi.",p:[60000,90000,"per bowl"],m:"Bun Cha Dac Kim, 1 Hang Manh, Hanoi",g:["hanoi","food"]},
+ {t:"19:00",k:"b",w:"Grab to Noi Bai Airport",n:"From Bánh Mì 25. Evening traffic can stretch the ride to an hour.",p:[250000,350000,"per car"],a:1},
  {t:"20:00",k:"b",w:"At Noi Bai, domestic terminal"},
  {t:"22:25",k:"b",w:"Flight to Da Nang",a:1},
  {t:"23:45",k:"b",w:"Land in Da Nang, Grab to Sekong Hotel",n:"160 Võ Nguyên Giáp, on the beach road, about 15 min from the airport. Check in and sleep.",p:[80000,150000,"per car; approximate"],m:"Sekong Hotel, 160 Vo Nguyen Giap, Da Nang"}
 ],boxes:[
- {k:"skip",h:"Left out today, and why",l:["<b>Hoa Lư ancient capital and Bích Động Pagoda.</b> With checkout at 12:00 and your bags with you after that, they'd mean hauling luggage around temples and up steps. Hoa Lư fits after the boat only if the hotel gives you a late checkout."]}
+ {k:"tip",h:"Prefer history to views?",l:["Swap Bích Động for <b>Hoa Lư ancient capital</b>, Vietnam's capital in the 10th century, now two quiet temples to the kings Đinh and Lê. It's about 20 min each way by Grab car, and 45 min there is enough. Leave Tam Cốc by 13:15 to be back for the 15:10 pickup."]}
 ]},
 {d:"2026-10-30",z:"VN",city:"Ba Na Hills",guide:"danang",tags:["Friday","Dragon Bridge show tonight"],items:[
- {t:"07:00",k:"b",w:"Wake up, breakfast at the hotel",n:"Breakfast is included. Check the Ba Na forecast before you go (see the rain plan below)."},
+ {t:"05:45",k:"s",w:"Sunrise on My Khe Beach",n:"Cross the road from Sekong. Da Nang's long, wide city beach is at its best at dawn, when locals swim and exercise before the heat. In late October the sea is usually too rough to swim, so keep to the sand and watch for the lifeguards' red flag. Grab a fresh coconut from a beach stall.",p:[20000,40000,"coconut"],m:"My Khe Beach, Da Nang",g:["danang","map"]},
+ {t:"07:00",k:"b",w:"Wake up, breakfast at the hotel",n:"Breakfast is included at Sekong. Check the Ba Na forecast before you go (see the rain plan below)."},
  {t:"07:45",k:"b",w:"Grab to Ba Na Hills",n:"45–60 min to the cable car station.",p:[350000,500000,"per car, one way"],g:["danang","map"]},
  {t:"08:40",k:"s",w:"Tickets and cable car up",n:"Entry with the cable car is 1,000,000 ₫; with the buffet lunch, 1,300,000 ₫. Buying online the night before is usually a little cheaper. The cable car runs from around 07:30 and climbs to 1,400 m in about 20 min.",p:[1000000,1300000,"per person"]},
  {t:"09:15",e:"10:15",k:"s",w:"Golden Bridge first",n:"A short walk from the top cable car station. Go straight there before tour groups arrive at around 10:00, then walk Le Jardin d'Amour gardens and the old Debay wine cellar next to it.",m:"Golden Bridge, Ba Na Hills"},
@@ -254,28 +258,31 @@ var DAYS=[
  {t:"11:30",k:"s",w:"Alpine coaster",n:"Inside the park and signposted. Runs from 08:00 to 17:00; queues build after lunch."},
  {t:"12:15",k:"s",w:"Lunch",n:"In the French Village, a short walk. The buffet, if you bought the combo ticket. Otherwise food at the top is pricey."},
  {t:"13:15",e:"15:00",k:"s",w:"Fantasy Park and the French Village",n:"A short walk within the French Village. A huge indoor games hall: the one part that works in rain."},
- {t:"15:15",k:"s",w:"Cable car down, Grab back to Sekong",n:"Back at around 16:45. Rest before the evening.",p:[350000,500000,"per car, one way"]},
+ {t:"15:15",k:"s",w:"Cable car down, Grab car straight to Han Market",n:"45–60 min into the city centre, on your way back anyway.",p:[350000,500000,"per car, one way"]},
+ {t:"16:15",e:"17:45",k:"s",w:"Shopping for home at Han Market",n:"The one shopping stop while all three of you are together, with a hotel to drop the bags at afterwards. Coffee, dried fruit and snacks are on the ground floor; see the shopping list below. Haggle for clothes and souvenirs. Closes around 19:00.",m:"Han Market, 119 Tran Phu, Da Nang",g:["danang","city"]},
+ {t:"17:45",k:"s",w:"Grab car back to Sekong",n:"About 15 min. Drop the shopping and freshen up.",p:[60000,120000,"per car"]},
  {t:"18:45",k:"s",w:"Grab to the east end of the Dragon Bridge",n:"About 10 min from Sekong.",p:[40000,100000,"per car"]},
- {t:"19:00",k:"s",w:"Dinner at Son Tra night market",n:"A short walk from the Grab drop-off. Street-food stalls every evening, right by the bridge.",m:"Son Tra night market, Da Nang",g:["danang","food"]},
+ {t:"19:00",k:"s",w:"Dinner at Son Tra night market",n:"A short walk from the Grab drop-off. Street-food stalls every evening, right by the bridge: grilled seafood skewers, bánh xèo (crispy pancakes), bánh tráng nướng (grilled rice paper) and cut fruit.",m:"Son Tra night market, Da Nang",g:["danang","food"]},
  {t:"21:00",k:"s",w:"Dragon Bridge breathes fire and water",n:"Free, at 21:00 for about 15 min. The bridge operator says it now runs on Friday as well as Saturday and Sunday; some guides still list weekends only, so ask your hotel in the morning. Walk to the east bank near the dragon's head by 20:45. This is the only show Bala and Antony can catch, so it's worth all three of you seeing it together tonight.",g:["danang","city"]},
  {t:"21:30",k:"s",w:"Grab back to Sekong",p:[40000,100000,"per car"]}
 ],boxes:[
- {k:"rain",h:"If it's pouring or the hills are in cloud",l:["Late October is the wettest time here, and Ba Na's summit is often inside cloud. If the forecast is bad, don't spend over ₹11,000 for three to look at fog. Instead: Museum of Cham Sculpture, Han Market and lunch at Con Market in the morning, then Hoi An together in the afternoon (it's lovely in light rain), then the Dragon Bridge show."]}
+ {k:"rain",h:"If it's pouring or the hills are in cloud",l:["Late October is the wettest time here, and Ba Na's summit is often inside cloud. If the forecast is bad, don't spend over ₹11,000 for three to look at fog. Instead: the Museum of Cham Sculpture in the morning and lunch at Con Market, then Hoi An together in the afternoon (it's lovely in light rain). Fit Han Market in before it closes at around 19:00, then the Dragon Bridge show."]},
+ {k:"tip",h:"What to buy for home",l:["<b>Coffee:</b> ground robusta for strong phin coffee. Trung Nguyên and Highlands are the big brands, and market stalls sell their own by weight (roughly 50,000–150,000 ₫ for 250–500 g). G7 3-in-1 sachets make easy gifts.","<b>A phin filter:</b> the small metal drip filter, so you can make it the Vietnamese way at home.","<b>Dried fruit and nuts:</b> dried mango, jackfruit and banana chips, and cashews.","<b>Sweets:</b> coconut candy (kẹo dừa), mè xửng (sesame and peanut candy from Hue) and bánh đậu xanh (mung bean cakes).","<b>Tea and spices:</b> lotus tea (trà sen) and phở spice packets.","<b>Light keepsakes:</b> a conical hat (nón lá), silk scarves, and small carvings from tomorrow's Marble Mountains stop.","<b>Packing:</b> ask for coffee vacuum-sealed, and keep anything liquid, like fish sauce, double-bagged in checked luggage."]}
 ]},
 {d:"2026-10-31",z:"VN",city:"Marble Mountains, then you split up",guide:"danang",tags:["Saturday"],items:[
- {t:"07:00",k:"b",w:"Wake up, breakfast at the hotel"},
+ {t:"07:00",k:"b",w:"Wake up, breakfast at the hotel",n:"Breakfast is included at Sekong."},
  {t:"07:45",k:"b",w:"Check out, Grab car with your bags to Marble Mountains",n:"About 15 min down the beach road. All three of you keep your bags with you from here.",p:[100000,150000,"per car"],g:["danang","map"]},
  {t:"08:05",k:"s",w:"Thủy Sơn: take the lift up",n:"Thủy Sơn is the main hill. Entry and the lift are paid separately. With bags, ride the lift down as well instead of taking the stairs.",p:[70000,0,"entry 40,000 + lift 15,000 each way"],m:"Marble Mountains, Da Nang"},
  {t:"08:15",e:"10:30",k:"s",w:"Pagodas, viewpoints and caves",n:"On foot along the paths at the top: Linh Ứng pagoda, the Vọng Giang Đài viewpoint, Tàng Chơn cave, then Huyền Không cave, where shafts of morning sunlight fall on the shrine. The stone steps are steep and slippery when wet."},
  {t:"10:40",k:"s",w:"Âm Phủ cave",n:"A short walk from the bottom of the lift. A walk-through depiction of the underworld, 30–40 min.",p:[20000]},
- {t:"11:20",k:"s",w:"Non Nước stone-carving village",n:"Walk along the road at the foot of the hills past the workshops. Browse only; heavy pieces need shipping."},
+ {t:"11:20",k:"s",w:"Non Nước stone-carving village",n:"Walk along the road at the foot of the hills past the workshops. Small carved pieces make good gifts if you didn't find any yesterday; heavy pieces need shipping."},
  {t:"12:30",k:"b",w:"Lunch together at the foot of the hills",n:"There's no famous restaurant here, but local places along Huyền Trân Công Chúa, the road around the hills, serve mì Quảng and bánh xèo. Pick one by its ratings on the map.",p:[60000,150000,"per person; approximate"],m:"restaurant near Marble Mountains Huyen Tran Cong Chua Da Nang"}
 ],split:{
  ba:[
   {t:"13:30",k:"b",w:"Grab car from Marble Mountains to Da Nang Airport",n:"About 20 min north, to the international terminal.",p:[100000,150000,"per car; approximate"],a:1},
-  {t:"14:30",k:"b",w:"At the airport"},
+  {t:"14:30",k:"b",w:"At the airport",n:"Time for a last cà phê sữa đá or bánh mì airside before the flight."},
   {t:"17:55",k:"b",w:"Flight to Singapore",a:1},
-  {t:"21:50",z:"SG",k:"b",w:"Land at Changi",n:"Dinner and sleep airside. The free snooze lounges in the transit areas are first come, first served. A transit hotel room is the comfortable option if you want a bed and shower.",g:null}
+  {t:"21:50",z:"SG",k:"b",w:"Land at Changi",n:"For dinner, Hainanese chicken rice at a transit-area food court. Then sleep airside. The free snooze lounges in the transit areas are first come, first served. A transit hotel room is the comfortable option if you want a bed and shower.",g:null}
  ],
  j:[
   {t:"13:30",k:"b",w:"Grab bike from Marble Mountains to Hoi An",n:"About 30–35 min south along the coast. Fine with a backpack on your lap, and the driver brings a helmet for you. Book a Grab car instead if you have a rolling suitcase or it's raining hard (about 250,000–350,000 ₫).",p:[100000,150000,"bike; approximate"],g:["danang","map"]},
@@ -286,12 +293,12 @@ var DAYS=[
   {t:"17:15",k:"s",w:"Cross to An Hội as the lanterns come on",n:"Walk over the An Hội footbridge. The riverside and the island light up around sunset."},
   {t:"17:45",k:"s",w:"Lantern boat on the Thu Bồn",n:"Boats leave from the riverside steps. About 20 min at dusk. Agree the price before you get in, and float a paper lantern.",p:[150000,200000,"per boat"]},
   {t:"18:30",k:"b",w:"Dinner: cơm gà at Cơm Gà Bà Buội",n:"Walk back to 22 Phan Châu Trinh for Hoi An's turmeric chicken rice. White rose dumplings are on most old-town menus too.",p:[40000,70000],m:"Com Ga Ba Buoi, Hoi An",g:["danang","food"]},
-  {t:"19:45",k:"b",w:"Grab bike to Delicate Hotel",n:"About 40–45 min. Leave by 19:45, not 20:00: the show starts at 21:00, not 21:30, and Saturday-night traffic is slow. Take a Grab car (about 300,000–400,000 ₫) if it's raining.",p:[120000,180000,"bike; approximate"],m:"Delicate Hotel, 23 Vo Van Kiet, Da Nang",a:1},
-  {t:"20:35",k:"b",w:"Check in at Delicate Hotel"},
-  {t:"21:00",k:"b",w:"Dragon Bridge fire and water show",n:"Walk 5–10 min from the hotel to the east bank. It's on again on Saturday nights, so you can see it a second time if you went on Friday, or stay longer in Hoi An instead.",g:["danang","city"]}
+  {t:"19:15",k:"s",w:"Hoi An night market",n:"A short walk over the bridge to Nguyễn Hoàng street on An Hội, busiest from 19:00 to 21:00: lanterns, snacks and small souvenirs. It's also when the old town looks its best, lit up across the river.",m:"Hoi An night market, Nguyen Hoang"},
+  {t:"20:15",k:"b",w:"Grab bike to Delicate Hotel",n:"About 40–45 min. Take a Grab car (about 300,000–400,000 ₫) if it's raining.",p:[120000,180000,"bike; approximate"],m:"Delicate Hotel, 23 Vo Van Kiet, Da Nang",a:1},
+  {t:"21:00",k:"b",w:"Check in at Delicate Hotel",n:"You've seen the Dragon Bridge show, so there's no rush for it tonight."},
+  {t:"21:30",k:"s",w:"Optional: Han River Bridge swings open",n:"If you're still up, Vietnam's first swing bridge turns sideways at around 23:00 on Saturday nights to let boats through, about 15 min's walk north along the river from the hotel. Or just rest: tomorrow starts at 07:00.",m:"Han River Bridge, Da Nang",g:["danang","city"]}
  ]},
 boxes:[
- {k:"warn",h:"Jones: the show starts at 21:00",l:["Your plan had it at 21:30. The bridge operator runs it at 21:00 on Friday, Saturday and Sunday, so leaving Hoi An at 20:00 means arriving as it starts. Leave by 19:45."]},
  {k:"rain",h:"If Hoi An floods",l:["From late October the river can flood the old town. If streets are under water, stay in Da Nang: Museum of Cham Sculpture, Han Market, then the riverfront."]}
 ]},
 {d:"2026-11-01",z:"VN",city:"Changi, and Jones's last morning in Da Nang",tags:["Sunday"],items:[],split:{
@@ -301,32 +308,32 @@ boxes:[
   {t:"08:30",z:"SG",k:"s",w:"Butterfly Garden, Terminal 3",n:"Follow the signs, or take the Skytrain if you slept in another terminal. About 1,000 butterflies and a 6 m waterfall, on Level 2 of the T3 transit area. Free."},
   {t:"09:30",z:"SG",k:"s",w:"The Slide@T3",n:"A short walk within T3. Singapore's tallest slide. You get a ride for spending S$10 at airport shops; riders must be 1.3–2 m tall."},
   {t:"10:30",z:"SG",k:"s",w:"Skytrain to Terminal 2 gardens",n:"The Enchanted Garden, and the rooftop Sunflower Garden if it's open (check the airport app)."},
-  {t:"12:00",z:"SG",k:"s",w:"Lunch: chicken rice or laksa",n:"At a transit-area food court."},
+  {t:"12:00",z:"SG",k:"s",w:"Lunch: laksa or nasi lemak",n:"Spicy coconut noodle soup, or coconut rice with sambal, at a transit-area food court."},
   {t:"13:00",z:"SG",k:"s",w:"Free movie theatre",n:"Walk or Skytrain to whichever is closer, in the T2 and T3 transit areas, with recent films. A good place for a nap."},
   {t:"15:30",z:"SG",k:"s",w:"Cactus Garden, Terminal 1",n:"Skytrain to T1. An open-air garden on Level 3 of the T1 transit area."},
   {t:"16:30",z:"SG",k:"s",w:"Shop, rest, charge phones",n:"Spend leftover Singapore dollars; dong can't be changed here easily."},
-  {t:"18:30",z:"SG",k:"s",w:"Dinner"},
+  {t:"18:30",z:"SG",k:"s",w:"Dinner",n:"Your last Singapore meal: try roti prata with curry, or another round of chicken rice."},
   {t:"19:30",z:"SG",k:"s",w:"Go to your departure gate",n:"Check the terminal on your boarding pass. Skytrain rides between T1, T2 and T3 take a few minutes; Terminal 4 is a bus ride away."},
   {t:"21:15",z:"SG",k:"b",w:"Flight to Chennai",a:1},
   {t:"22:50",z:"IN",k:"b",w:"Land in Chennai",n:"Home."}
  ],
  j:[
-  {t:"07:00",k:"b",w:"Wake up, get ready, pack",n:"Pack before you head out, so checking out later takes five minutes."},
+  {t:"07:00",k:"b",w:"Wake up, get ready, pack",n:"Breakfast isn't included at Delicate Hotel; you'll eat after Son Tra. Pack before you head out, so checking out later takes five minutes."},
   {t:"07:15",k:"s",w:"Grab bike to the Lady Buddha at Son Tra",n:"About 20 min up to Linh Ứng Pagoda, with the 67 m white statue facing the sea. Drivers rarely wait at the top: book a new Grab bike from the pagoda when you're done, or agree a waiting price before you get off.",p:[50000,70000,"bike, one way"],m:"Linh Ung Pagoda Son Tra, Da Nang",g:["danang","map"]},
   {t:"08:30",k:"s",w:"Grab bike to breakfast: bún chả cá",n:"About 20 min across the river to Bún Chả Cá 109, 109 Nguyễn Chí Thanh, for Da Nang's breakfast fish-cake noodle soup.",p:[30000,50000,"per bowl; ride about 40,000–60,000"],m:"Bun Cha Ca 109, Nguyen Chi Thanh, Da Nang",g:["danang","food"]},
   {t:"09:30",k:"s",w:"Museum of Cham Sculpture",n:"About 15 min on foot, or a short Grab bike. The world's largest collection of Cham art, with Shiva, Vishnu and Ganesha carvings that will feel familiar. About an hour.",p:[60000],m:"Museum of Cham Sculpture, Da Nang",g:["danang","city"]},
-  {t:"10:40",k:"s",w:"Pink cathedral and Han Market",n:"Walk north along the river: about 10 min to Da Nang Cathedral, then a few more to Han Market for coffee beans and snacks to take home.",m:"Han Market, Da Nang"},
+  {t:"10:40",k:"s",w:"Pink cathedral and Han Market",n:"Walk north along the river: about 10 min to Da Nang Cathedral, then a few more to Han Market for anything you didn't buy on Friday.",m:"Han Market, Da Nang"},
   {t:"11:15",k:"s",w:"Early lunch: Mì Quảng",n:"A short Grab bike or about 10 min on foot from Han Market to Mì Quảng 1A, 1 Hải Phòng, for Da Nang's signature noodles.",p:[30000,60000],m:"Mi Quang 1A, 1 Hai Phong, Da Nang",g:["danang","food"]},
   {t:"11:45",k:"s",w:"Grab bike back to Delicate Hotel, check out by 12:00",n:"About 10 min over the Dragon Bridge. Your bag is with you from here.",p:[25000,40000,"bike"]},
   {t:"12:15",k:"s",w:"Coffee on the east bank of the river",n:"Walk with your bag to a café on the riverfront near the hotel, looking across at the city, and past the carp-dragon statue by the Love Bridge."},
   {t:"14:00",k:"b",w:"Grab to Da Nang Airport",n:"10–15 min. A Grab bike works with a backpack; take a car with a suitcase.",p:[30000,100000,"bike to car"],a:1},
-  {t:"14:30",k:"b",w:"At the airport"},
+  {t:"14:30",k:"b",w:"At the airport",n:"Time for a last cà phê sữa đá or bánh mì airside before the flight."},
   {t:"17:40",k:"b",w:"Flight to Malaysia",a:1},
-  {t:"21:40",z:"MY",k:"b",w:"Land in Malaysia, sleep",n:"If you leave the airport, Indians are visa-free in Malaysia until 31 December 2026, but you must submit the Malaysia Digital Arrival Card (MDAC) before landing."}
+  {t:"21:40",z:"MY",k:"b",w:"Land in Malaysia, sleep",n:"Eat at the airport before you sleep: nasi lemak or roti canai. If you leave the airport, Indians are visa-free in Malaysia until 31 December 2026, but you must submit the Malaysia Digital Arrival Card (MDAC) before landing."}
  ]}},
 {d:"2026-11-02",z:"MY",city:"Kuala Lumpur to Chennai",only:"j",items:[
  {t:"06:10",k:"b",w:"Flight to Chennai",a:1},
- {t:"07:25",z:"IN",k:"b",w:"Land in Chennai",n:"Home."}
+ {t:"07:25",z:"IN",k:"b",w:"Land in Chennai",n:"Home, in time for breakfast."}
 ]}
 ];
 
@@ -336,6 +343,7 @@ var PREP=[
  {who:"Jones",t:"Submit the <b>Malaysia Digital Arrival Card (MDAC)</b> online before 1 Nov. Indians are visa-free in Malaysia until 31 Dec 2026, but only with the MDAC done."},
  {who:"All",t:"Carry your <b>Vietnam e-visa</b> printed and saved on your phone, and check that its dates cover your whole stay."},
  {who:"All",t:"Ask <b>Bao Anh Hotel</b> for early check-in on 26 Oct. You'll arrive at around 11:00 and check-in is usually 14:00."},
+ {who:"All",t:"Leave room in your bags for coffee and snacks. The shopping stop is Han Market in Da Nang on 30 Oct, while all three of you are together."},
  {who:"All",t:"Install <b>Grab</b> and add a payment card; download offline Google Maps for Hanoi, Ninh Binh, Da Nang and Hoi An."},
  {who:"All",t:"Tap <b>Save for offline</b> in the sidebar so these guides work without signal, and add the site to your home screen."},
  {who:"All",t:"Pack so you can carry your bag for a whole day. On 29 Oct you have it from noon until Da Nang, and on 31 Oct from 07:45 (Jones until about 20:35). Jones: a backpack also makes the Grab bike rides possible."}
@@ -377,9 +385,10 @@ function itemHTML(it){
   if(it.p)meta.push(price(it.p));
   if(it.m)meta.push('<a href="'+gmaps(it.m)+'" target="_blank" rel="noopener">Map<span class="sr"> (opens in a new tab)</span> ↗</a>');
   if(it.g)meta.push(glink(it.g));
+  var or=it.or?'<div class="or"><div class="what">'+it.or.w+'</div>'+(it.or.n?'<p class="note">'+it.or.n+'</p>':'')+'</div>':'';
   return '<div class="it" id="i-'+it.id+'" data-ts="'+it.ts+'"><div class="tm">'+it.t+(it.e?'<small>to '+it.e+'</small>':'')+(showZ?'<span class="tz" title="'+TZN[z]+' time">'+TZN[z]+'</span>':'')+'</div>'
     +'<div class="rail"><i class="dot'+(it.k==="s"?" s":it.k==="c"?" c":"")+'"></i></div>'
-    +'<div><div class="what"><span class="flagslot"></span>'+it.w+kind+'</div>'+(it.n?'<p class="note">'+it.n+'</p>':'')+(meta.length?'<div class="meta">'+meta.join("")+'</div>':'')+'</div></div>';
+    +'<div><div class="what"><span class="flagslot"></span>'+it.w+kind+'</div>'+(it.n?'<p class="note">'+it.n+'</p>':'')+(meta.length?'<div class="meta">'+meta.join("")+'</div>':'')+or+'</div></div>';
 }
 function listHTML(list){return list.length?'<div class="list">'+list.map(itemHTML).join("")+'</div>':"";}
 function render(){
@@ -476,7 +485,7 @@ function exportICS(){
     var end=it.e?Date.parse(it.day.d+"T"+it.e+":00"+TZ[it.z||it.day.z]):it.ts+30*60000;
     L.push("BEGIN:VEVENT","UID:"+it.id+(it.track||"")+"-"+i+"@vietnam-guides","DTSTAMP:"+icsDate(Date.now()),"DTSTART:"+icsDate(it.ts),"DTEND:"+icsDate(end),
       fold("SUMMARY:"+icsText(it.w)));
-    var desc=(it.k==="s"?"Suggested. ":"")+(it.n?plain(it.n):"");
+    var desc=(it.k==="s"?"Suggested. ":"")+(it.n?plain(it.n):"")+(it.or?" "+plain(it.or.w)+(it.or.n?": "+plain(it.or.n):""):"");
     if(desc)L.push(fold("DESCRIPTION:"+icsText(desc)));
     if(it.m)L.push(fold("LOCATION:"+icsText(it.m)));
     if(it.a)L.push("BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+icsText(it.w),"TRIGGER:-PT45M","END:VALARM");
